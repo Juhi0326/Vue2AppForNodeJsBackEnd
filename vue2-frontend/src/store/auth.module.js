@@ -52,6 +52,7 @@ export const auth = {
     logout(state) {
       state.status.loggedIn = false;
       state.user = null;
+      localStorage.removeItem(user);
     },
     registerSuccess(state) {
       state.status.loggedIn = false;

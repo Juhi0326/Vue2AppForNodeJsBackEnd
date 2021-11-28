@@ -1,25 +1,21 @@
 <template>
   <div id="app">
     <Navbar />
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from '../src/components/Navbar.vue';
+import Navbar from "../src/components/Navbar.vue";
 export default {
   name: "App",
 
   components: {
-    Navbar
-
+    Navbar,
   },
 
-  data: () => ({
-    
-  }),
-  methods: {
-
-  },
+  data: () => ({}),
+  methods: {},
 };
 </script>
 <style>

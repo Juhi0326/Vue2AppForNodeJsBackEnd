@@ -25,7 +25,7 @@
       </v-menu>
     </v-app-bar>
 
-      <v-navigation-drawer
+      <!-- <v-navigation-drawer
           permanent
           expand-on-hover
         >
@@ -71,7 +71,7 @@
               <v-list-item-title>Starred</v-list-item-title>
             </v-list-item>
           </v-list>
-        </v-navigation-drawer>
+        </v-navigation-drawer> -->
     </nav>
   </div>
 </template>
