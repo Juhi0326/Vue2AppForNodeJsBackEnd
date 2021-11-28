@@ -1,9 +1,6 @@
 <template>
   <div>
-      <nav>
-
-      
-    <v-app-bar color="purple darken-3">
+    <v-app-bar color="purple darken-3" app>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Page title</v-toolbar-title>
@@ -25,9 +22,10 @@
       </v-menu>
     </v-app-bar>
 
-      <!-- <v-navigation-drawer
+      <v-navigation-drawer
           permanent
           expand-on-hover
+          app
         >
           <v-list>
             <v-list-item class="px-2">
@@ -71,8 +69,7 @@
               <v-list-item-title>Starred</v-list-item-title>
             </v-list-item>
           </v-list>
-        </v-navigation-drawer> -->
-    </nav>
+        </v-navigation-drawer>
   </div>
 </template>
 
