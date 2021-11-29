@@ -7,9 +7,10 @@
         :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
         flat
         tile
+        min-width="450"
       >
           <v-card min-width="400" class="ma-6">
-          <v-form @submit.prevent="login">
+          <v-form @submit.prevent="handleLogin">
             <v-img height="300" src=""></v-img>
             <v-card-title class="pa-12">Login Form</v-card-title>
             <v-divider> </v-divider>
@@ -75,7 +76,7 @@ export default {
         },
         (error) => {
           console.log(error);
-          this.errorMessage = error.message;
+          this.errorMessage = error.response.data.messages;
         }
       );
     },
