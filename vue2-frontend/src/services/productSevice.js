@@ -1,5 +1,5 @@
 import axios from 'axios';
-import authHeader from './auth-header';
+import authHeader from './authHeader';
 
 const API_URL = 'http://localhost:8081/products';
 
@@ -44,7 +44,7 @@ class ProductService {
         //res.data.headers['Content-Type']; //application/json;charset=utf-8
     }
 
-    async addDiscountForProductById(discount) {
+    async addDiscountForProductById(discount, id) {
         try {
              await axios.patch(API_URL + '/' + id + '/add-discount', discount, { headers: authHeader() });
         } catch (error) {
@@ -98,4 +98,4 @@ class ProductService {
 
 }
 
-export default newn ProductService;
+export default new ProductService;

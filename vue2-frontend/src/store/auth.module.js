@@ -45,6 +45,8 @@ export const auth = {
     loginSuccess(state, user) {
       state.status.loggedIn = true;
       state.user = user;
+      console.log(state.status.loggedIn)
+      console.log(state.user)
     },
     loginFailure(state) {
       state.status.loggedIn = false;
