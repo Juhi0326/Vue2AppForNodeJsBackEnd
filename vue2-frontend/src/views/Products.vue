@@ -2,7 +2,7 @@
   <v-app class="container">
     <v-row>
       <v-col cols="12" sm="6" md="3">
-        <v-text-field label="Keress a termékek között!" outlined v-model="searchField"></v-text-field>
+        <v-text-field label="Keress a termékek között!" outlined v-model="searchField" class="ml-12"></v-text-field>
       </v-col>
     </v-row>
     <v-row>
@@ -26,7 +26,7 @@
           <v-card-text>
             <v-row align="center" class="mx-0">
               <div v-if="product.price===product.discountedPrice" class="grey--text ms-4">ár: {{ product.price }}</div>
-              <div v-else>kedvezményes ár: {{product.discountedPrice}}</div>
+              <div v-else>ár: <span id="discount">{{product.discountedPrice}}</span></div>
             </v-row>
           </v-card-text>
 
@@ -76,6 +76,7 @@ export default {
   },
   mounted() {
     this.getProducts();
+    console.log(this.$route.name)
   },
   methods: {
     formatMoney(amount) {
@@ -115,5 +116,9 @@ export default {
 <style scoped>
 .card-class {
   margin: 50px;
+}
+#discount {
+    color: crimson;
+    font-weight: bold;
 }
 </style>>

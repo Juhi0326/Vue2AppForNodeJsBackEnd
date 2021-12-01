@@ -4,10 +4,10 @@
       <v-app-bar color="red" dark>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Home</v-toolbar-title>
+        <v-btn text color="white" @click="goToHomePage" v-if="this.$route.name!=='Home'">Főoldal</v-btn>
 
         <v-spacer></v-spacer>
-
+        <v-btn text color="white" @click="goToProductsPage" v-if="this.$route.name!=='Products'">Termék lista</v-btn>
         <v-btn text color="white" @click="login"  v-if="!loggedIn">Bejelentkezés</v-btn>
         <v-btn text color="white" @click="logout"  v-if="loggedIn">Kijelentkezés</v-btn>
 
@@ -31,7 +31,7 @@
       </v-app-bar>
     </div>
 
-    <v-navigation-drawer permanent expand-on-hover app>
+    <v-navigation-drawer permanent expand-on-hover app v-if="!isMobile">
       <v-list>
         <v-list-item class="px-2">
           <v-list-item-avatar>
@@ -90,9 +90,20 @@ export default {
     logout () {
       this.$store.dispatch("auth/logout");
       this.$router.push("/");
-    }
+    },
+    goToProductsPage () {
+      this.$router.push("/products");
+    },
+    goToHomePage () {
+      this.$router.push("/");
+    },
+
+    
   },
   computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.xsOnly;
+    },
     loggedIn() {
       if (this.$store.state.auth.status.loggedIn) {
         return this.$store.state.auth.status.loggedIn;
