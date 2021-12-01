@@ -11,9 +11,14 @@ class ProductService {
             return error
         }
     }
-    getProductyId(id) {
-
-        return axios.get(API_URL + '/' + id, { headers: authHeader() });
+    getProductById(id) {
+        try {
+            return axios.get(API_URL + '/' + id, { headers: authHeader() });
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+       
     }
     async updateProductById(id, updatedObject) {
         try {

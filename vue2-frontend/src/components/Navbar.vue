@@ -3,11 +3,10 @@
     <div id="app">
       <v-app-bar color="red" dark>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-        <v-btn text color="white" @click="goToHomePage" v-if="this.$route.name!=='Home'">Főoldal</v-btn>
-
+        
         <v-spacer></v-spacer>
         <v-btn text color="white" @click="goToProductsPage" v-if="this.$route.name!=='Products'">Termék lista</v-btn>
+        <v-btn text color="white" @click="goToHomePage" v-if="this.$route.name!=='Home'">Főoldal</v-btn>
         <v-btn text color="white" @click="login"  v-if="!loggedIn">Bejelentkezés</v-btn>
         <v-btn text color="white" @click="logout"  v-if="loggedIn">Kijelentkezés</v-btn>
 
