@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-app class="container" id="inspire">
     <v-row>
       <v-col
         cols="12"
@@ -9,8 +9,7 @@
         v-for="(product, index) in filteredProducts"
         :key="index"
       >
-        <v-app id="inspire">
-          <v-card class="mx-auto mt-6">
+          <v-card class="card-class">
             <v-img
               aspect-ratio="1"
               :src="product.imagePath"
@@ -38,10 +37,9 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </v-app>
       </v-col>
     </v-row>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -109,5 +107,8 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style scoped>
+.card-class {
+    margin: 50px;
+}
+</style>>
