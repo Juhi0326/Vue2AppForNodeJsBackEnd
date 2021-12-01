@@ -1,56 +1,46 @@
 <template>
   <div>
-    <div v-for="(product, index) in filteredProducts" :key="index">
-      <v-app id="inspire">
-        <v-card class="mx-auto my-12" max-width="374">
-          <template slot="progress">
-            <v-progress-linear
-              color="deep-purple"
-              height="10"
-              indeterminate
-            ></v-progress-linear>
-          </template>
-
-          <v-img
-            height="250"
+    <v-row>
+      <v-col
+        cols="12"
+        sm="8"
+        md="6"
+        lg="3"
+        v-for="(product, index) in filteredProducts"
+        :key="index"
+      >
+        <v-app id="inspire">
+          <v-card class="mx-auto mt-6">
+            <v-img
+              aspect-ratio="1"
               :src="product.imagePath"
               :alt="product.name"
-              @click="goToProductDetails(product._id)"
-            
-          ></v-img>
+            ></v-img>
 
-          <v-card-title>{{ product.name }}</v-card-title>
+            <v-card-title>{{ product.name }}</v-card-title>
 
-          <v-card-text>
-            <v-row align="center" class="mx-0">
-              <div class="grey--text ms-4">ár: {{product.price}}</div>
-            </v-row>
+            <v-card-text>
+              <v-row align="center" class="mx-0">
+                <div class="grey--text ms-4">ár: {{ product.price }}</div>
+              </v-row>
+            </v-card-text>
 
-            <div class="my-4 text-subtitle-1">Leírás</div>
-
-            <div>
-              {{product.description}}
-            </div>
-          </v-card-text>
-
-          <v-divider class="mx-4"></v-divider>
-
-          <v-card-title>Kattints a részletekért!</v-card-title>
-
-          <v-card-text> </v-card-text>
-
-          <v-card-actions>
-            <v-btn
-              color="deep-purple lighten-2"
-              text
-              @click="goToProductDetails()"
-            >
-              Részletek
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-app>
-    </div>
+            <v-divider class="mx-4"></v-divider>
+            <v-card-title class="mt-2">Kattints a részletekért!</v-card-title>
+            <v-card-text> </v-card-text>
+            <v-card-actions>
+              <v-btn
+                color="deep-purple lighten-2"
+                text
+                @click="goToProductDetails(product._id)"
+              >
+                Részletek
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-app>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -96,7 +86,7 @@ export default {
 
     goToProductDetails(id) {
       console.log(id);
-      this.$router.push("/Product-details/" + id);
+      this.$router.push("/product-details/" + id);
     },
 
     async getProducts() {
