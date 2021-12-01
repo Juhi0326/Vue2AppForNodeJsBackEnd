@@ -1,8 +1,8 @@
 <template>
-  <v-app class="container" id="inspire">
+  <v-app class="container">
     <v-row>
       <v-col cols="12" sm="6" md="3">
-        <v-text-field label="Search" outlined v-model="searchField"></v-text-field>
+        <v-text-field label="Keress a termékek között!" outlined v-model="searchField"></v-text-field>
       </v-col>
     </v-row>
     <v-row>
@@ -25,13 +25,12 @@
 
           <v-card-text>
             <v-row align="center" class="mx-0">
-              <div class="grey--text ms-4">ár: {{ product.price }}</div>
+              <div v-if="product.price===product.discountedPrice" class="grey--text ms-4">ár: {{ product.price }}</div>
+              <div v-else>kedvezményes ár: {{product.discountedPrice}}</div>
             </v-row>
           </v-card-text>
 
-          <v-divider class="mx-4"></v-divider>
-          <v-card-title class="mt-2">Kattints a részletekért!</v-card-title>
-          <v-card-text> </v-card-text>
+          <v-divider class="mx-4"></v-divider>    
           <v-card-actions>
             <v-btn
               color="deep-purple lighten-2"
@@ -104,6 +103,7 @@ export default {
         this.content.map((product) => {
           if (typeof product.price === "number") {
             product.price = this.formatMoney(product.price);
+            product.discountedPrice = this.formatMoney(product.discountedPrice);
           }
         });
       }
