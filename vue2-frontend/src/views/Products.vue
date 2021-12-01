@@ -1,6 +1,11 @@
 <template>
   <v-app class="container" id="inspire">
     <v-row>
+      <v-col cols="12" sm="6" md="3">
+        <v-text-field label="Search" outlined v-model="searchField"></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col
         cols="12"
         sm="8"
@@ -9,34 +14,34 @@
         v-for="(product, index) in filteredProducts"
         :key="index"
       >
-          <v-card class="card-class">
-            <v-img
-              aspect-ratio="1"
-              :src="product.imagePath"
-              :alt="product.name"
-            ></v-img>
+        <v-card class="card-class">
+          <v-img
+            aspect-ratio="1"
+            :src="product.imagePath"
+            :alt="product.name"
+          ></v-img>
 
-            <v-card-title>{{ product.name }}</v-card-title>
+          <v-card-title>{{ product.name }}</v-card-title>
 
-            <v-card-text>
-              <v-row align="center" class="mx-0">
-                <div class="grey--text ms-4">ár: {{ product.price }}</div>
-              </v-row>
-            </v-card-text>
+          <v-card-text>
+            <v-row align="center" class="mx-0">
+              <div class="grey--text ms-4">ár: {{ product.price }}</div>
+            </v-row>
+          </v-card-text>
 
-            <v-divider class="mx-4"></v-divider>
-            <v-card-title class="mt-2">Kattints a részletekért!</v-card-title>
-            <v-card-text> </v-card-text>
-            <v-card-actions>
-              <v-btn
-                color="deep-purple lighten-2"
-                text
-                @click="goToProductDetails(product._id)"
-              >
-                Részletek
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+          <v-divider class="mx-4"></v-divider>
+          <v-card-title class="mt-2">Kattints a részletekért!</v-card-title>
+          <v-card-text> </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="deep-purple lighten-2"
+              text
+              @click="goToProductDetails(product._id)"
+            >
+              Részletek
+            </v-btn>
+          </v-card-actions>
+        </v-card>
       </v-col>
     </v-row>
   </v-app>
@@ -109,6 +114,6 @@ export default {
 
 <style scoped>
 .card-class {
-    margin: 50px;
+  margin: 50px;
 }
 </style>>
