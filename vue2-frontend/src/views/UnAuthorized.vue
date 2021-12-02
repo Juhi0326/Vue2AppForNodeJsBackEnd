@@ -15,6 +15,7 @@
 <script>
 import GoBack from "../components/GoBack.vue";
 export default {
+  name: 'UnAuthorized',  
   components: {
     GoBack,
   },

@@ -26,11 +26,11 @@
             <v-card-actions>
               <Button
                 v-if="role === 'user' || role === 'admin'"
-                @click = "AddToCart"
-                class = "ma-2"
-                propColor = "red"
-                :propRounded = true
-                :propDark= true
+                @click="AddToCart"
+                class="ma-2"
+                propColor="red"
+                :propRounded="true"
+                :propDark="true"
               >
                 Beteszem a kosárba
               </Button>
@@ -46,13 +46,14 @@
 </template>
 
 <script>
-import productService from '../services/productSevice';
-import Button from '../components/Button.vue';
-import GoBack from '../components/GoBack.vue'
+import productService from "../services/productSevice";
+import Button from "../components/Button.vue";
+import GoBack from "../components/GoBack.vue";
 export default {
+  name: "ProductDetails",
   components: {
     Button,
-    GoBack
+    GoBack,
   },
   data() {
     return {

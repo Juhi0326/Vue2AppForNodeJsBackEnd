@@ -2,46 +2,45 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import AuthService from '../services/authService';
 import Home from "../views/Home";
-import Login from '../views/Login'
-import Products from '../views/Products'
-import ProductDetails from '../views/ProductDetails'
-import UnAuthorized from '../views/UnAuthorized'
-import NotFound from '../views/NotFound'
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     component: Home,
   },
   {
-    path: "/login",
-    name: "Login",
-    component: Login,
+    path: '/login',
+    name: 'Login',
+    component: () =>
+      import(/* webpackChunkName: "Login" */ '../views/Login'),
   },
   {
-    path: "/products",
-    name: "Products",
-    component: Products,
+    path: '/products',
+    name: 'Products',
+    component: () =>
+      import(/* webpackChunkName: "Products" */ '../views/Products'),
   },
   {
     path: '/product-details/:id',
-    name: 'ProductDetails',
-    component: ProductDetails,
-    meta: { authorize: ['user'] } 
+    name: "ProductDetails",
+    component: () =>
+      import(/* webpackChunkName: "ProductDetails" */ '../views/ProductDetails'),
+    meta: { authorize: ['user'] }
   },
   {
     path: '/unauthorized',
-    name: 'UnAuthorized',
-    component: UnAuthorized
+    name: "UnAuthorized",
+    component: () =>
+      import(/* webpackChunkName: "UnAuthorized" */ '../views/UnAuthorized'),
   },
   {
     path: '/*',
-    name: 'NotFound',
-    component: NotFound
-
+    name: "NotFound",
+    component: () =>
+      import(/* webpackChunkName: "NotFound" */ '../views/NotFound'),
   }
 ];
 
@@ -53,21 +52,21 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  
+
   const { authorize } = to.meta;
   const currentUser = AuthService.getUser()
 
   if (authorize) {
-      if (!currentUser) {
-          // not logged in so redirect to login page with the return url
-          return next({ path: '/login', query: { returnUrl: to.path } });
-      }
+    if (!currentUser) {
+      // not logged in so redirect to login page with the return url
+      return next({ path: '/login', query: { returnUrl: to.path } });
+    }
 
-      // check if route is restricted by role
-      if (authorize.length && !authorize.includes(currentUser.role)) {
-          // role not authorised so redirect to home page
-          return next({ path: '/unauthorized' });
-      }
+    // check if route is restricted by role
+    if (authorize.length && !authorize.includes(currentUser.role)) {
+      // role not authorised so redirect to unauthorized page
+      return next({ path: '/unauthorized' });
+    }
   }
 
   next();

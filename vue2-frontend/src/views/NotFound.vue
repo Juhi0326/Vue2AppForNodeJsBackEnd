@@ -15,6 +15,7 @@
 <script>
 import GoBack from "../components/GoBack.vue";
 export default {
+  name: 'NotFound',  
   components: {
     GoBack,
   },
