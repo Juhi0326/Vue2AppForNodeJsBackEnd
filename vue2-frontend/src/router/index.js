@@ -1,9 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import AuthService from '../services/authService';
 import Home from "../views/Home";
 import Login from '../views/Login'
 import Products from '../views/Products'
 import ProductDetails from '../views/ProductDetails'
+import UnAuthorized from '../views/UnAuthorized'
 import NotFound from '../views/NotFound'
 
 Vue.use(VueRouter);
@@ -27,7 +29,13 @@ const routes = [
   {
     path: '/product-details/:id',
     name: 'ProductDetails',
-    component: ProductDetails
+    component: ProductDetails,
+    meta: { authorize: ['user'] } 
+  },
+  {
+    path: '/unauthorized',
+    name: 'UnAuthorized',
+    component: UnAuthorized
   },
   {
     path: '/*',
@@ -42,6 +50,28 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  
+  const { authorize } = to.meta;
+  const currentUser = AuthService.getUser()
+
+  if (authorize) {
+      if (!currentUser) {
+          // not logged in so redirect to login page with the return url
+          return next({ path: '/login', query: { returnUrl: to.path } });
+      }
+
+      // check if route is restricted by role
+      if (authorize.length && !authorize.includes(currentUser.role)) {
+          // role not authorised so redirect to home page
+          return next({ path: '/unauthorized' });
+      }
+  }
+
+  next();
+})
 
 
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '../store/index'
 //import authHeader from './authHeader';
 
 const API_URL = 'http://localhost:8081/users/';
@@ -84,6 +85,9 @@ class AuthService {
           console.log('Error', error.message);
       }
     }
+  }
+  getUser() {
+    return store.state.auth.user;
   }
 
 
