@@ -2,8 +2,11 @@
   <v-btn
     v-on="$listeners"
     :color="propColor"
-    :rounded="propRounded"
-    :dark="propDark"
+    :rounded ="propRounded"
+    :dark ="propDark"
+    :class="propClass"
+    :outlined="PropOutlined"
+    :text="propText"
   >
     <slot></slot>
   </v-btn>
@@ -11,6 +14,6 @@
 
 <script>
 export default {
-  props: ["propColor", "propRounded", "propDark"],
+  props: ['propColor', 'propRounded', 'propDark', 'propClass', 'PropOutlined', 'propText'],
 };
 </script>

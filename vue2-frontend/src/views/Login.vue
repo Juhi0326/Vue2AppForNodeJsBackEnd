@@ -1,60 +1,91 @@
 <template>
-<div id="app">
-  <v-app id="inspire">
-    <div>
-      <v-card
-        class="d-flex justify-center mb-6"
-        :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
-        flat
-        tile
-        min-width="450"
-      >
-          <v-card min-width="400" class="ma-6">
-          <v-form @submit.prevent="handleLogin">
-            <v-img height="300" src=""></v-img>
-            <v-card-title class="pa-12">Login Form</v-card-title>
-            <v-divider> </v-divider>
-            <div>
-              <v-row>
-                <v-col>
-                  <v-text-field
-                    v-model="email"
-                    label="Email"
-                    required
-                    class="px-12 pt-12"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="password"
-                    label="Password"
-                    :type="show1 ? 'text' : 'password'"
-                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                     @click:append="show1 = !show1"
-                    required
-                    class="px-12"
-                  ></v-text-field>
-                  <div v-if="errorMessage"
-                  class="px-12 pt-12 red--text"
-                  >
-                    {{errorMessage}}
+  <div id="app">
+    <v-app id="inspire" class="container">
+      <v-row>
+        <v-col cols="3">
+          <GoBack />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" sm="8">
+          <div>
+            <v-card
+              class="d-flex justify-center mb-6"
+              flat
+              tile
+            >
+              <v-card class="ma-2">
+                <v-form @submit.prevent="handleLogin">
+                  <v-img height="250" src="../assets/door.jpg"></v-img>
+                  <v-card-title class="pa-12">Login Form</v-card-title>
+                  <v-divider> </v-divider>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <v-text-field
+                          v-model="email"
+                          label="Email"
+                          required
+                          class="px-12 pt-12"
+                        ></v-text-field>
+                        <v-text-field
+                          v-model="password"
+                          label="Password"
+                          :type="show1 ? 'text' : 'password'"
+                          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                          @click:append="show1 = !show1"
+                          required
+                          class="px-12"
+                        ></v-text-field>
+                        <div v-if="errorMessage" class="px-12 pt-12 red--text">
+                          {{ errorMessage }}
+                        </div>
+                      </v-col>
+                    </v-row>
                   </div>
-                </v-col>
-              </v-row>
-            </div>
-            <v-btn type="submit" class="ma-12">Submit</v-btn>
-            <v-btn @click="cancel()" class="ma-12">Cancel</v-btn>
-          </v-form>
-        </v-card>
-      </v-card>
-  
-     
-    </div>
-  </v-app>
-</div>
+                  <v-row>
+                    <v-col>
+                      <Button
+                        class="ma-12"
+                        propColor="primary"
+                        :propRounded="true"
+                        :propDark="true"
+                        type="submit"
+                      >
+                        Belépek
+                      </Button>
+                    </v-col>
+                    <v-col>
+                      <v-btn class="ma-12" text color="primary" @click="goToRegisterForm">
+                        Regisztráció
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-btn text rounded> Elfelejtett jelszó </v-btn>
+                    </v-col>
+                  </v-row>
+                  <!-- <v-btn type="submit" class="ma-12">Submit</v-btn> -->
+                </v-form>
+              </v-card>
+            </v-card>
+          </div>
+        </v-col>
+      </v-row>
+    </v-app>
+  </div>
 </template>
 
 <script>
+import Button from "../components/Button.vue";
+import GoBack from "../components/GoBack.vue";
 export default {
   name: "Login",
+  components: {
+    Button,
+    GoBack,
+  },
   data() {
     return {
       show1: false,
@@ -79,6 +110,9 @@ export default {
           this.errorMessage = error.response.data.messages;
         }
       );
+    },
+    goToRegisterForm() {
+        this.$router.push("/register");
     },
 
     cancel() {
