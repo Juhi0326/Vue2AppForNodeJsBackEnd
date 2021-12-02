@@ -9,11 +9,7 @@
       <v-row>
         <v-col cols="12" sm="8">
           <div>
-            <v-card
-              class="d-flex justify-center mb-6"
-              flat
-              tile
-            >
+            <v-card class="d-flex justify-center mb-6" flat tile>
               <v-card class="ma-2">
                 <v-form @submit.prevent="handleLogin">
                   <v-img height="250" src="../assets/door.jpg"></v-img>
@@ -56,14 +52,19 @@
                       </Button>
                     </v-col>
                     <v-col>
-                      <v-btn class="ma-12" text color="primary" @click="goToRegisterForm">
+                      <v-btn
+                        class="ma-12"
+                        text
+                        color="primary"
+                        @click="goToRegisterForm"
+                      >
                         Regisztráció
                       </v-btn>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col>
-                      <v-btn text rounded> Elfelejtett jelszó </v-btn>
+                      <v-btn text rounded @click="goToResetPasswordEmail"> Elfelejtett jelszó </v-btn>
                     </v-col>
                   </v-row>
                   <!-- <v-btn type="submit" class="ma-12">Submit</v-btn> -->
@@ -112,7 +113,10 @@ export default {
       );
     },
     goToRegisterForm() {
-        this.$router.push("/register");
+      this.$router.push("/register");
+    },
+    goToResetPasswordEmail() {
+      this.$router.push("/resetPasswordEmail");
     },
 
     cancel() {

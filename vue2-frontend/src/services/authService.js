@@ -36,7 +36,7 @@ class AuthService {
 
   sendResetPasswordEmail(email) {
     try {
-      return axios.post(API_URL + 'reset-password', email)
+      return axios.post(API_URL + 'reset-password', {email})
     } catch (error) {
        // Error 😨
        if (error.response) {
