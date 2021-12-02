@@ -30,6 +30,12 @@ const routes = [
       import(/* webpackChunkName: "ResetPasswordEmail" */ '../views/ResetPasswordEmail'),
   },
   {
+    path: '/users/addNewPassword/:id/:token',
+    name: 'AddNewPassword',
+    component: () =>
+      import(/* webpackChunkName: "AddNewPassword" */ '../views/AddNewPassword'),
+  },
+  {
     path: '/products',
     name: 'Products',
     component: () =>
