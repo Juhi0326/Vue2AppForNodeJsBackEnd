@@ -26,11 +26,11 @@
             <v-card-actions>
               <Button
                 v-if="role === 'user' || role === 'admin'"
-                @click="AddToCart"
-                class="ma-2"
-                rounded
-                color="red"
-                dark
+                @click = "AddToCart"
+                class = "ma-2"
+                propColor = "red"
+                :propRounded = true
+                :propDark= true
               >
                 Beteszem a kosárba
               </Button>
@@ -39,20 +39,20 @@
         </v-app>
       </v-col>
       <v-col cols="1">
-        <Button @click="goToProductsPage" class="ma-2">
-          visszalépek
-        </Button>
+        <GoBack />
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-import productService from "../services/productSevice";
-import Button from "../components/Button.vue";
+import productService from '../services/productSevice';
+import Button from '../components/Button.vue';
+import GoBack from '../components/GoBack.vue'
 export default {
   components: {
     Button,
+    GoBack
   },
   data() {
     return {
@@ -109,9 +109,6 @@ export default {
     },
     getRole() {
       this.role = this.$store.state.auth.user.role;
-    },
-    goToProductsPage () {
-      this.$router.push("/products");
     },
   },
 };

@@ -1,13 +1,16 @@
 <template>
-  <v-btn v-on="$listeners" rounded color="red" dark>
+  <v-btn
+    v-on="$listeners"
+    :color="propColor"
+    :rounded="propRounded"
+    :dark="propDark"
+  >
     <slot></slot>
   </v-btn>
-  <!--   <button>
-    <slot></slot>
-  </button>
- -->
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["propColor", "propRounded", "propDark"],
+};
 </script>
