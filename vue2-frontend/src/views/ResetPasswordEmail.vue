@@ -7,6 +7,7 @@
         </v-col>
       </v-row>
       <v-row>
+        <v-col cols="2"></v-col>
         <v-col cols="12" sm="8">
           <div>
             <v-card class="d-flex justify-center mb-6" flat tile>
@@ -19,7 +20,7 @@
                   <v-divider> </v-divider>
                   <v-card-text>
                     Egyet se félj, csak add meg az email címedet, és kattints az
-                    Küldés gombra! Az elküldéstől számított 1 órán belül
+                    Küldés gombra! Az emailben majd kattints a linkre, de arra vigyázz, hogy az elküldéstől számított 1 órán belül
                     szükséges megadni az új jelszót.
                   </v-card-text>
                   <v-divider> </v-divider>
