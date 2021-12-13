@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import AuthService from '../services/authService';
 import Home from "../views/Home";
 
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -46,7 +47,7 @@ const routes = [
     name: "ProductDetails",
     component: () =>
       import(/* webpackChunkName: "ProductDetails" */ '../views/ProductDetails'),
-    meta: { authorize: ['user'] }
+    meta: { authorize: ['user','moderator', 'admin'] }
   },
   {
     path: '/mydata/:id',
@@ -54,6 +55,13 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "MyData" */ '../views/MyData'),
     meta: { authorize: ['user', 'moderator', 'admin'] }
+  },
+  {
+    path: '/admin/add-new-product',
+    name: "AddNewProduct",
+    component: () =>
+      import(/* webpackChunkName: "AddNewProduct" */ '../views/admin/AddNewProduct'),
+    meta: { authorize: ['admin'] }
   },
   {
     path: '/unauthorized',
