@@ -34,7 +34,7 @@
                           v-model="email"
                           label="Email"
                           required
-                          class="px-12 pt-12"
+                          class="px-12"
                         ></v-text-field>
                         <v-text-field
                           v-model="password"

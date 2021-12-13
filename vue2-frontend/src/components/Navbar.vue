@@ -3,12 +3,28 @@
     <div id="app">
       <v-app-bar color="red" dark>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        
+
         <v-spacer></v-spacer>
-        <v-btn text color="white" @click="goToProductsPage" v-if="this.$route.name!=='Products'">Termék lista</v-btn>
-        <v-btn text color="white" @click="goToHomePage" v-if="this.$route.name!=='Home'">Főoldal</v-btn>
-        <v-btn text color="white" @click="login"  v-if="!loggedIn">Bejelentkezés</v-btn>
-        <v-btn text color="white" @click="logout"  v-if="loggedIn">Kijelentkezés</v-btn>
+        <v-btn
+          text
+          color="white"
+          @click="goToProductsPage"
+          v-if="this.$route.name !== 'Products'"
+          >Termék lista</v-btn
+        >
+        <v-btn
+          text
+          color="white"
+          @click="goToHomePage"
+          v-if="this.$route.name !== 'Home'"
+          >Főoldal</v-btn
+        >
+        <v-btn text color="white" @click="login" v-if="!loggedIn"
+          >Bejelentkezés</v-btn
+        >
+        <v-btn text color="white" @click="logout" v-if="loggedIn"
+          >Kijelentkezés</v-btn
+        >
 
         <v-btn icon>
           <v-icon>mdi-magnify</v-icon>
@@ -34,7 +50,7 @@
       <v-list>
         <v-list-item class="px-2">
           <v-list-item-avatar>
-            <v-img src=""></v-img>
+            <v-img :src="userImage"></v-img>
           </v-list-item-avatar>
         </v-list-item>
 
@@ -112,6 +128,12 @@ export default {
     currentUser() {
       if (this.$store.state.auth.user) {
         return this.$store.state.auth.user.userName;
+      }
+      return null;
+    },
+    userImage() {
+        if (this.$store.state.auth.user) {
+        return "http://localhost:8081/" + this.$store.state.auth.user.userImage;
       }
       return null;
     },
