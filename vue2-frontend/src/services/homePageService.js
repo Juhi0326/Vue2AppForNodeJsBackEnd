@@ -6,7 +6,7 @@ const API_URL = 'http://localhost:8081/';
 
 class HomePageService {
   getHomePage() {
-    return axios.get(API_URL + 'home');
+    return axios.get(API_URL + 'homePage');
   }
 
 }

@@ -54,6 +54,12 @@
                           required
                           class="px-12"
                         ></v-text-field>
+                        <v-file-input
+                          accept="image/*"
+                          label="File input"
+                          @change="onFileUpload"
+                          class="px-12"
+                        ></v-file-input>
                       </v-col>
                     </v-row>
                   </div>
@@ -71,16 +77,14 @@
                     </v-col>
                   </v-row>
                   <v-row v-if="errorMessage" class="px-12 pt-12 red--text">
-                      <v-col>
-                          {{ errorMessage }}
-                      </v-col>
-                    
+                    <v-col>
+                      {{ errorMessage }}
+                    </v-col>
                   </v-row>
                   <v-row v-if="message" class="px-12 pt-12 green--text">
-                      <v-col>
-                          {{ message }}
-                      </v-col>
-                    
+                    <v-col>
+                      {{ message }}
+                    </v-col>
                   </v-row>
                   <!-- <v-btn type="submit" class="ma-12">Submit</v-btn> -->
                 </v-form>
@@ -112,34 +116,40 @@ export default {
     password2: "",
     message: "",
     errorMessage: "",
+    FILE: null,
   }),
 
   computed: {},
   methods: {
+    onFileUpload(event) {
+       console.log(event)
+      this.FILE = event;
+     
+    },
     handleRegister() {
-      const user = {
-        userName: this.userName,
-        email: this.email,
-        password: this.password,
-        role: "user",
-      };
+      const user = new FormData();
+      user.append('userName', this.userName)
+      user.append('email', this.email)
+      user.append('password', this.password)
+      user.append('role', 'user')
+      user.append('userImage', this.FILE)
+
+
       authService
         .register(user)
         .then((response) => {
-          this.errorMessage = '' 
+          this.errorMessage = "";
           this.message = response.data.message;
           this.clear();
           console.log(response.data);
         })
         .catch((err) => {
-            if (err.response.data.message) {
-                this.errorMessage = err.response.data.message;
-            }
-          else if(err.response.data.Error.message){
-              this.errorMessage = err.response.data.Error.message
-          }
-          else {
-              this.errorMessage = 'ismeretlen hiba történt'
+          if (err.response.data.message) {
+            this.errorMessage = err.response.data.message;
+          } else if (err.response.data.Error.message) {
+            this.errorMessage = err.response.data.Error.message;
+          } else {
+            this.errorMessage = "ismeretlen hiba történt";
           }
         });
     },
@@ -148,6 +158,7 @@ export default {
       this.email = "";
       this.password = "";
       this.password2 = "";
+      this.FILE = null;
     },
   },
 };

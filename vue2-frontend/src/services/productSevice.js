@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './authHeader';
 
-const API_URL = 'http://localhost:8081/products';
+const API_URL = 'http://localhost:8081/products2';
 
 class ProductService {
     getProducts() {

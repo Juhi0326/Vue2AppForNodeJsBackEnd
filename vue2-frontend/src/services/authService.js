@@ -26,12 +26,7 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + 'signup', {
-      userName: user.userName,
-      email: user.email,
-      password: user.password,
-      role: user.role
-    });
+    return axios.post(API_URL + 'signup2', user);
   }
 
   sendResetPasswordEmail(email) {
