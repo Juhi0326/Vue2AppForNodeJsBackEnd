@@ -72,23 +72,17 @@
       <v-divider></v-divider>
 
       <v-list nav dense>
-        <v-list-item link>
-          <v-list-item-icon>
-            <v-icon>mdi-folder</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>My Files</v-list-item-title>
-        </v-list-item>
-        <v-list-item link>
+        <v-list-item link v-if="userRole === 'admin'">
           <v-list-item-icon>
             <v-icon>mdi-account-multiple</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Shared with me</v-list-item-title>
+          <v-list-item-title>Admin funkciók</v-list-item-title>
         </v-list-item>
         <v-list-item link>
           <v-list-item-icon>
-            <v-icon>mdi-star</v-icon>
+            <v-icon @click="goToMyDataPage">mdi-star</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Starred</v-list-item-title>
+          <v-list-item-title @click="goToMyDataPage">Adataim</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -97,23 +91,23 @@
 
 <script>
 export default {
-
   methods: {
-    login () {
-       this.$router.push("/login");
+    login() {
+      this.$router.push("/login");
     },
-    logout () {
+    logout() {
       this.$store.dispatch("auth/logout");
       this.$router.push("/");
     },
-    goToProductsPage () {
+    goToProductsPage() {
       this.$router.push("/products");
     },
-    goToHomePage () {
+    goToHomePage() {
       this.$router.push("/");
     },
-
-    
+    goToMyDataPage() {
+      this.$router.push("/mydata/" + this.$store.state.auth.user.userId);
+    },
   },
   computed: {
     isMobile() {
@@ -132,7 +126,7 @@ export default {
       return null;
     },
     userImage() {
-        if (this.$store.state.auth.user) {
+      if (this.$store.state.auth.user) {
         return "http://localhost:8081/" + this.$store.state.auth.user.userImage;
       }
       return null;

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h1>{{ content.Title.titleDescription }}</h1>
+    <h1 v-if="isContent">{{ content.Title.titleDescription }}</h1>
     <img :src="titleImagePath" alt="" class="responsive" />
-    <h3>{{ content.Heading.headingDescription }}</h3>
+    <h3 v-if="isContent">{{ content.Heading.headingDescription }}</h3>
     <img :src="headingImagePath" alt="" class="responsive" />
   </div>
 </template>
@@ -13,23 +13,26 @@ export default {
   name: "Home",
   data() {
     return {
+      isContent : false,
       content: null,
-      titleImagePath: '',
-      headingImagePath: ''
+      titleImagePath: "",
+      headingImagePath: "",
     };
   },
   created() {
-    this.getHomePageData()
+    this.getHomePageData();
   },
   methods: {
     getHomePageData() {
       HomePegeService.getHomePage().then(
         (response) => {
           this.content = response.data.HomePage[0];
+          this.isContent = true
           console.log(this.content);
           this.titleImagePath =
             "http://localhost:8081/" + this.content.Title.titleImagePath;
-           this.headingImagePath = "http://localhost:8081/" + this.content.Heading.headingImagePath
+          this.headingImagePath =
+            "http://localhost:8081/" + this.content.Heading.headingImagePath;
         },
         (error) => {
           this.content =

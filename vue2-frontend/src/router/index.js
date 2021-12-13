@@ -49,6 +49,13 @@ const routes = [
     meta: { authorize: ['user'] }
   },
   {
+    path: '/mydata/:id',
+    name: "MyData",
+    component: () =>
+      import(/* webpackChunkName: "MyData" */ '../views/MyData'),
+    meta: { authorize: ['user', 'moderator', 'admin'] }
+  },
+  {
     path: '/unauthorized',
     name: "UnAuthorized",
     component: () =>
