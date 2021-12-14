@@ -22,27 +22,27 @@
         <v-btn text color="white" @click="login" v-if="!loggedIn"
           >Bejelentkezés</v-btn
         >
-        <v-btn text color="white" @click="logout" v-if="loggedIn"
-          >Kijelentkezés</v-btn
-        >
-
-        <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-
-        <v-menu left bottom>
+        <v-menu left bottom v-if="userRole === 'admin'">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
-              <v-icon>mdi-dots-vertical</v-icon>
+            <v-btn text color="white" v-bind="attrs" v-on="on">
+              Admin funkciók
             </v-btn>
           </template>
 
           <v-list>
-            <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-              <v-list-item-title>Option {{ n }}</v-list-item-title>
+            <v-list-item
+              v-for="link in links"
+              :key="link.title"
+              :cols="link.flex"
+              @click="goTo(link.route)"
+            >
+              <v-list-item-title>{{ link.title }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
+        <v-btn text color="white" @click="logout" v-if="loggedIn"
+          >Kijelentkezés</v-btn
+        >
       </v-app-bar>
     </div>
 
@@ -76,7 +76,9 @@
           <v-list-item-icon>
             <v-icon @click="goToAdminDashboard">mdi-account-multiple</v-icon>
           </v-list-item-icon>
-          <v-list-item-title @click="goToAdminDashboard">Admin Dashboard</v-list-item-title>
+          <v-list-item-title @click="goToAdminDashboard"
+            >Admin Dashboard</v-list-item-title
+          >
         </v-list-item>
         <v-list-item link>
           <v-list-item-icon>
@@ -110,8 +112,10 @@ export default {
     },
     goToAdminDashboard() {
       this.$router.push("/admin/admin-dashboard");
-    }
-
+    },
+    goTo(route) {
+      this.$router.push(route);
+    },
   },
   computed: {
     isMobile() {
@@ -140,6 +144,27 @@ export default {
         return this.$store.state.auth.user.role;
       }
       return null;
+    },
+    links() {
+      return [
+        {
+          title: "Új termék létrehozása",
+          src: "https://cdn.vuetifyjs.com/images/cards/house.jpg",
+          flex: 12,
+          route: "/admin/add-new-product",
+        },
+        {
+          title: "Felhasználók kezelése",
+          src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
+          flex: 6,
+          route: '/admin/user-list'
+        },
+        {
+          title: "Rendelések",
+          src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
+          flex: 6,
+        },
+      ];
     },
   },
 };

@@ -49,6 +49,7 @@ export default {
         title: "Felhasználók kezelése",
         src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
         flex: 6,
+        route: '/admin/user-list'
       },
       {
         title: "Rendelések",
