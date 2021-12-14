@@ -1,10 +1,23 @@
 <template>
   <div class="container">
-    <v-app id="inspire">
+      <v-row>
+          <v-col cols="1"></v-col>
+          <v-col cols="3">
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+        </v-col>
+        </v-row>
+        <br>
       <v-data-table
         :headers="headers"
         :items="users"
-        sort-by="calories"
+        :search="search"
+        sort-by="userName"
         class="elevation-1"
         v-if="users"
       >
@@ -14,12 +27,10 @@
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
-
               <v-card>
                 <v-card-title>
                   <span class="text-h5">{{ formTitle }}</span>
                 </v-card-title>
-
                 <v-card-text>
                   <v-container>
                     <v-row>
@@ -39,8 +50,8 @@
                         <v-text-field
                           v-model="editedItem.role"
                           label="Jogkör"
-                        ></v-text-field>
-                      </v-col>>
+                        ></v-text-field> </v-col
+                      >>
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -80,7 +91,6 @@
           <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
         </template>
       </v-data-table>
-    </v-app>
   </div>
 </template>
 
@@ -90,6 +100,7 @@ export default {
   name: "UserList",
   data: () => ({
     users: [],
+    search: "",
     dialog: false,
     dialogDelete: false,
     headers: [
@@ -109,7 +120,6 @@ export default {
       userName: "",
       email: "",
       role: "",
-
     },
     defaultItem: {
       userName: "",
@@ -138,11 +148,14 @@ export default {
   },
   methods: {
     async getUsers() {
-      await userService.getUsers().then((response) => {
-        this.users = response.data.users;
-      }).catch((err) => {
-          console.log(err)
-      })
+      await userService
+        .getUsers()
+        .then((response) => {
+          this.users = response.data.users;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
 
     editItem(item) {
