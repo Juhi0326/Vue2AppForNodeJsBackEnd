@@ -8,6 +8,14 @@ class UserService {
         try {
             return axios.get(API_URL, { headers: authHeader() });
         } catch (error) {
+           return error
+        }
+    }
+
+    deleteUserById(id) {
+        try {
+            return axios.delete(API_URL + '/' + id , { headers: authHeader() })
+        } catch (error) {
             return error
         }
     }

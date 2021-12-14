@@ -183,8 +183,13 @@ export default {
       });
     },
 
-    closeDelete() {
+    async closeDelete() {
       this.dialogDelete = false;
+      await userService.deleteUserById(this.editedItem._id).then((response) => {
+          console.log(response)
+      }).catch((err) => {
+           console.log(err)
+      })
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
