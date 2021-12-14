@@ -18,7 +18,7 @@
             >
               <v-card class="ma-2">
                 <v-form @submit.prevent="addProduct">
-                  <v-img height="250" src="../../assets/trefi.jpg"></v-img>
+                  <v-img height="250" src="../../assets/fogaskerekek.jpg"></v-img>
                   <v-card-title class="pa-8"
                     >Új termék hozzáadása Form</v-card-title
                   >

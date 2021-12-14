@@ -64,6 +64,13 @@ const routes = [
     meta: { authorize: ['admin'] }
   },
   {
+    path: '/admin/admin-dashboard',
+    name: "AdminDashboard",
+    component: () =>
+      import(/* webpackChunkName: "AdminDashboard" */ '../views/admin/AdminDashboard'),
+    meta: { authorize: ['admin'] }
+  },
+  {
     path: '/unauthorized',
     name: "UnAuthorized",
     component: () =>

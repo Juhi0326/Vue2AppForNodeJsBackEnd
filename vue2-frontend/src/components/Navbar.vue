@@ -74,9 +74,9 @@
       <v-list nav dense>
         <v-list-item link v-if="userRole === 'admin'">
           <v-list-item-icon>
-            <v-icon>mdi-account-multiple</v-icon>
+            <v-icon @click="goToAdminDashboard">mdi-account-multiple</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Admin funkciók</v-list-item-title>
+          <v-list-item-title @click="goToAdminDashboard">Admin Dashboard</v-list-item-title>
         </v-list-item>
         <v-list-item link>
           <v-list-item-icon>
@@ -108,6 +108,10 @@ export default {
     goToMyDataPage() {
       this.$router.push("/mydata/" + this.$store.state.auth.user.userId);
     },
+    goToAdminDashboard() {
+      this.$router.push("/admin/admin-dashboard");
+    }
+
   },
   computed: {
     isMobile() {
