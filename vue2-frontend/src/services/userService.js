@@ -19,6 +19,13 @@ class UserService {
             return error
         }
     }
+    changeUserDataById(id, payload) {
+        try {
+            return axios.patch(API_URL + '/admin/' + id , payload, { headers: authHeader() } )
+        } catch (error) {
+            return error
+        }
+    }
 }
 
 export default new UserService;
