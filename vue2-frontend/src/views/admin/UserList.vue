@@ -34,22 +34,10 @@
               <v-card-text>
                 <v-container>
                   <v-row>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.userName"
-                        label="Felhasználó név"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.email"
-                        label="Email cím"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
+                    <v-col cols="12">
                       <v-select
                         :items="roles"
-                        label="Jogkörök"
+                        label="Jogkör"
                         v-model="editedItem.role"
                       ></v-select>
                     </v-col>
@@ -111,25 +99,21 @@ export default {
       },
       { text: "Email", value: "email" },
       { text: "Jogkör", value: "role" },
-      { text: "Actions", value: "actions", sortable: false },
+      { text: "Tevékenység", value: "actions", sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
-      userName: "",
-      email: "",
       role: "",
     },
     defaultItem: {
-      userName: "",
-      email: "",
       role: "",
     },
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "New Item" : "Jogkör módosítása";
     },
     roles() {
       return ["user", "moderator", "admin"];
@@ -211,14 +195,6 @@ export default {
         payload.append(
           "role",
           (this.users[this.editedIndex], this.editedItem.role)
-        );
-        payload.append(
-          "email",
-          (this.users[this.editedIndex], this.editedItem.email)
-        );
-        payload.append(
-          "userName",
-          (this.users[this.editedIndex], this.editedItem.userName)
         );
 
         console.log(this.users[this.editedIndex], this.editedItem, payload);
