@@ -17,7 +17,7 @@
               max-width="500"
             >
               <v-card class="ma-2">
-                <v-form @submit.prevent="handleRegisterForm" ref="form">
+                <v-form @submit.prevent="handleRegisterForm" ref="registerForm" v-model="formValidity">
                   <v-img height="250" src="../assets/pen.jpg"></v-img>
                   <v-card-title class="pa-8">Regisztrációs Form</v-card-title>
                   <v-divider> </v-divider>
@@ -112,6 +112,7 @@ export default {
     Button,
   },
   data: () => ({
+    formValidity: true,
     show1: false,
     show2: false,
     userName: "",
@@ -160,7 +161,7 @@ export default {
         .then((response) => {
           this.errorMessage = "";
           this.message = response.data.message;
-          this.clear();
+          this.resetForm();
           console.log(response.data);
         })
         .catch((err) => {
@@ -173,12 +174,8 @@ export default {
           }
         });
     },
-    clear() {
-      this.userName = "";
-      this.email = "";
-      this.password = "";
-      this.password2 = "";
-      this.FILE = null;
+    resetForm() {
+      this.$refs.registerForm.reset()
     },
   },
 };
