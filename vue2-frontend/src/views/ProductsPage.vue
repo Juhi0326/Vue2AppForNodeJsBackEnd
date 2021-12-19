@@ -49,7 +49,7 @@
 <script>
 import ProductService from "../services/productSevice";
 export default {
-  name: "Products",
+  name: "ProductsPage",
   data() {
     return {
       content: [],

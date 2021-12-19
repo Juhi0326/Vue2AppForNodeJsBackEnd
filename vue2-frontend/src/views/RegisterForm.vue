@@ -17,7 +17,7 @@
               max-width="500"
             >
               <v-card class="ma-2">
-                <v-form @submit.prevent="handleRegister">
+                <v-form @submit.prevent="handleRegisterForm" ref="form">
                   <v-img height="250" src="../assets/pen.jpg"></v-img>
                   <v-card-title class="pa-8">Regisztrációs Form</v-card-title>
                   <v-divider> </v-divider>
@@ -102,7 +102,7 @@ import GoBack from "../components/GoBack.vue";
 import Button from "../components/Button.vue";
 import authService from "../services/authService";
 export default {
-  name: "Register",
+  name: "RegisterForm",
   components: {
     GoBack,
     Button,
@@ -117,6 +117,17 @@ export default {
     message: "",
     errorMessage: "",
     FILE: null,
+    rules: {
+        required: value => !!value || "Required.",
+        email: value => {
+          // eslint-disable-next-line
+          const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,20}$/g
+          return (
+            pattern.test(value) ||
+            "Min. 8 characters with at least one capital letter, a number and a special character."
+          );
+        }
+      }
   }),
 
   computed: {},
@@ -126,7 +137,7 @@ export default {
       this.FILE = event;
      
     },
-    handleRegister() {
+    handleRegisterForm() {
       const user = new FormData();
       user.append('userName', this.userName)
       user.append('email', this.email)
@@ -136,7 +147,7 @@ export default {
 
 
       authService
-        .register(user)
+        .RegisterForm(user)
         .then((response) => {
           this.errorMessage = "";
           this.message = response.data.message;

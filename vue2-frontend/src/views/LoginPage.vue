@@ -56,7 +56,7 @@
                         class="ma-12"
                         text
                         color="primary"
-                        @click="goToRegisterForm"
+                        @click="goToRegisterFormForm"
                       >
                         Regisztráció
                       </v-btn>
@@ -82,7 +82,7 @@
 import Button from "../components/Button.vue";
 import GoBack from "../components/GoBack.vue";
 export default {
-  name: "Login",
+  name: "LoginPage",
   components: {
     Button,
     GoBack,
@@ -112,8 +112,8 @@ export default {
         }
       );
     },
-    goToRegisterForm() {
-      this.$router.push("/register");
+    goToRegisterFormForm() {
+      this.$router.push("/RegisterForm");
     },
     goToResetPasswordEmail() {
       this.$router.push("/resetPasswordEmail");

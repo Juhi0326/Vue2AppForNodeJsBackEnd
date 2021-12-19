@@ -14,15 +14,15 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'LoginPage',
     component: () =>
-      import(/* webpackChunkName: "Login" */ '../views/Login'),
+      import(/* webpackChunkName: "LoginPage" */ '../views/LoginPage'),
   },
   {
-    path: '/register',
-    name: 'Register',
+    path: '/RegisterForm',
+    name: 'RegisterForm',
     component: () =>
-      import(/* webpackChunkName: "Register" */ '../views/Register'),
+      import(/* webpackChunkName: "RegisterForm" */ '../views/RegisterForm'),
   },
   {
     path: '/resetPasswordEmail',
@@ -38,9 +38,9 @@ const routes = [
   },
   {
     path: '/products',
-    name: 'Products',
+    name: 'ProductsPage',
     component: () =>
-      import(/* webpackChunkName: "Products" */ '../views/Products'),
+      import(/* webpackChunkName: "ProductsPage" */ '../views/ProductsPage'),
   },
   {
     path: '/product-details/:id',

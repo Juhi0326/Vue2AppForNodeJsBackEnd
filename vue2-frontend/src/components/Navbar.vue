@@ -80,7 +80,7 @@
             >Admin Dashboard</v-list-item-title
           >
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link v-if="currentUser">
           <v-list-item-icon>
             <v-icon @click="goToMyDataPage">mdi-star</v-icon>
           </v-list-item-icon>

@@ -28,14 +28,14 @@ export const auth = {
       AuthService.logout();
       commit('logout');
     },
-    register({ commit }, user) {
-      return AuthService.register(user).then(
+    RegisterForm({ commit }, user) {
+      return AuthService.RegisterForm(user).then(
         response => {
-          commit('registerSuccess');
+          commit('RegisterFormSuccess');
           return Promise.resolve(response.data);
         },
         error => {
-          commit('registerFailure');
+          commit('RegisterFormFailure');
           return Promise.reject(error);
         }
       );
@@ -57,10 +57,10 @@ export const auth = {
       state.user = null;
       localStorage.removeItem(user);
     },
-    registerSuccess(state) {
+    RegisterFormSuccess(state) {
       state.status.loggedIn = false;
     },
-    registerFailure(state) {
+    RegisterFormFailure(state) {
       state.status.loggedIn = false;
     }
   }
