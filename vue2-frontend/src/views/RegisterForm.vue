@@ -124,8 +124,9 @@ export default {
     errorMessage: "",
     FILE: null,
     nameRules: [
-      (value) => !!value || "A felhasználó nevet köztelező megadni!",
+      (value) => !!value || "A felhasználónevet kötelező megadni!",
       (value) => value.length > 2 || "A minimum karakterszám 3!",
+      (value) => value.length < 21 || "A maximum karakterszám 20!",
     ],
     emailRules: [
       (value) => !!value || "Az email címet kötelező megadni!.",
