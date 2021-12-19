@@ -120,7 +120,7 @@ export default {
     },
 
     cancel() {
-      this.$router.replace({ name: "Home" });
+      this.$router.replace({ name: "HomePage" });
     },
   },
 };

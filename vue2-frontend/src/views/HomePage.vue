@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import HomePegeService from "../services/homePageService";
+import HomePageService from "../services/homePageService";
 export default {
-  name: "Home",
+  name: "HomePage",
   data() {
     return {
       isContent : false,
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     getHomePageData() {
-      HomePegeService.getHomePage().then(
+      HomePageService.getHomePage().then(
         (response) => {
           this.content = response.data.HomePage[0];
           this.isContent = true

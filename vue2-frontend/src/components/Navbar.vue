@@ -15,8 +15,8 @@
         <v-btn
           text
           color="white"
-          @click="goToHomePage"
-          v-if="this.$route.name !== 'Home'"
+          @click="goToHomePagePage"
+          v-if="this.$route.name !== 'HomePage'"
           >Főoldal</v-btn
         >
         <v-btn text color="white" @click="login" v-if="!loggedIn"
@@ -93,6 +93,7 @@
 
 <script>
 export default {
+
   methods: {
     login() {
       this.$router.push("/login");
@@ -104,7 +105,7 @@ export default {
     goToProductsPage() {
       this.$router.push("/products");
     },
-    goToHomePage() {
+    goToHomePagePage() {
       this.$router.push("/");
     },
     goToMyDataPage() {

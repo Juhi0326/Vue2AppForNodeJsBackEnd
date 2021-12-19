@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import AuthService from '../services/authService';
-import Home from "../views/Home";
+import HomePage from "../views/HomePage";
 
 
 Vue.use(VueRouter);
@@ -9,8 +9,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'HomePage',
+    component: HomePage,
   },
   {
     path: '/login',
