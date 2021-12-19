@@ -62,7 +62,7 @@
                   </div>
                   <v-row>
                     <v-col>
-                      <Button
+                      <ButtonComp
                         class="ma-12"
                         propColor="primary"
                         :propRounded="true"
@@ -70,7 +70,7 @@
                         type="submit"
                       >
                         Hozzáadom a terméket!
-                      </Button>
+                      </ButtonComp>
                     </v-col>
                   </v-row>
                   <v-row v-if="errorMessage" class="px-12 pt-12 red--text">
@@ -96,13 +96,13 @@
 
 <script>
 import GoBack from "../../components/GoBack.vue";
-import Button from "../../components/Button.vue";
+import ButtonComp from "../../components/ButtonComp.vue";
 import productService from "../../services/productSevice";
 export default {
   name: "AddNewProduct",
   components: {
     GoBack,
-    Button,
+    ButtonComp,
   },
   data: () => ({
     productName: "",

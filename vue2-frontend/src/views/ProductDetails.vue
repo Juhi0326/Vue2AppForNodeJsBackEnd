@@ -24,7 +24,7 @@
               A kedvezmény mértéke: {{ Product.discountPercentage }}%
             </v-card-text>
             <v-card-actions>
-              <Button
+              <ButtonComp
                 v-if="role === 'user' || role === 'admin'"
                 @click="AddToCart"
                 class="ma-2"
@@ -33,7 +33,7 @@
                 :propDark="true"
               >
                 Beteszem a kosárba
-              </Button>
+              </ButtonComp>
             </v-card-actions>
           </v-card>
         </v-app>
@@ -47,12 +47,12 @@
 
 <script>
 import productService from "../services/productSevice";
-import Button from "../components/Button.vue";
+import ButtonComp from "../components/ButtonComp.vue";
 import GoBack from "../components/GoBack.vue";
 export default {
   name: "ProductDetails",
   components: {
-    Button,
+    ButtonComp,
     GoBack,
   },
   data() {

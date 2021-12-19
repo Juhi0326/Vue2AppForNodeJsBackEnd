@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Button
+  <ButtonComp
     @click="$router.back()"
     class="ma-2"
     propColor="red"
@@ -8,15 +8,15 @@
     :propDark="true"
   >
     visszalépek
-  </Button>
+  </ButtonComp>
   </div>
 </template>
 
 <script>
-import Button from "./Button.vue";
+import ButtonComp from "./ButtonComp.vue";
 export default {
   components: {
-    Button,
+    ButtonComp,
   },
 };
 </script>

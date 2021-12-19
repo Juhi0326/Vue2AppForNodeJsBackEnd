@@ -41,7 +41,7 @@
                   </div>
                   <v-row>
                     <v-col>
-                      <Button
+                      <ButtonComp
                         class="ma-12"
                         propColor="primary"
                         :propRounded="true"
@@ -49,7 +49,7 @@
                         type="submit"
                       >
                         Belépek
-                      </Button>
+                      </ButtonComp>
                     </v-col>
                     <v-col>
                       <v-btn
@@ -79,12 +79,12 @@
 </template>
 
 <script>
-import Button from "../components/Button.vue";
+import ButtonComp from "../components/ButtonComp.vue";
 import GoBack from "../components/GoBack.vue";
 export default {
   name: "LoginPage",
   components: {
-    Button,
+    ButtonComp,
     GoBack,
   },
   data() {

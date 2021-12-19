@@ -69,15 +69,16 @@
                   </div>
                   <v-row>
                     <v-col>
-                      <Button
+                      <ButtonComp
                         class="ma-12"
-                        propColor="primary"
+                        propColor="red"
                         :propRounded="true"
                         :propDark="true"
                         type="submit"
+                        :propDisabled="!formValidity"
                       >
                         Regisztrálok!
-                      </Button>
+                      </ButtonComp>
                     </v-col>
                   </v-row>
                   <v-row v-if="errorMessage" class="px-12 pt-12 red--text">
@@ -103,16 +104,16 @@
 
 <script>
 import GoBack from "../components/GoBack.vue";
-import Button from "../components/Button.vue";
+import ButtonComp from "../components/ButtonComp.vue";
 import authService from "../services/authService";
 export default {
   name: "RegisterForm",
   components: {
     GoBack,
-    Button,
+    ButtonComp,
   },
   data: () => ({
-    formValidity: true,
+    formValidity: false,
     show1: false,
     show2: false,
     userName: "",
@@ -174,7 +175,11 @@ export default {
           }
         });
     },
+    checkValidity () {
+      console.log(this.formValidity)
+    },
     resetForm() {
+      console.log(this.$refs.registerForm)
       this.$refs.registerForm.reset()
     },
   },

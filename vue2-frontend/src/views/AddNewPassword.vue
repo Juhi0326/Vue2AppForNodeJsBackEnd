@@ -42,7 +42,7 @@
                   </div>
                   <v-row>
                     <v-col>
-                      <Button
+                      <ButtonComp
                         class="ma-12"
                         propColor="primary"
                         :propRounded="true"
@@ -50,7 +50,7 @@
                         type="submit"
                       >
                         Új jelszó megadása
-                      </Button>
+                      </ButtonComp>
                     </v-col>
                   </v-row>
                   <v-row v-if="errorMessage" class="px-12 pt-12 red--text">
@@ -75,13 +75,13 @@
 </template>
 
 <script>
-import Button from "../components/Button.vue";
+import ButtonComp from "../components/ButtonComp.vue";
 import authService from "../services/authService";
 
 export default {
   name: "AddNewPassword",
   components: {
-    Button,
+    ButtonComp,
   },
   data: () => ({
     show1: false,

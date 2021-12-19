@@ -44,7 +44,7 @@
                   </div>
                   <v-row>
                     <v-col>
-                      <Button
+                      <ButtonComp
                         class="ma-12"
                         propColor="primary"
                         :propRounded="true"
@@ -52,7 +52,7 @@
                         type="submit"
                       >
                         Küldés
-                      </Button>
+                      </ButtonComp>
                     </v-col>
                   </v-row>
                 </v-form>
@@ -66,13 +66,13 @@
 </template>
 
 <script>
-import Button from "../components/Button.vue";
+import ButtonComp from "../components/ButtonComp.vue";
 import GoBack from "../components/GoBack.vue";
 import authService from "../services/authService";
 export default {
   name: "ResetPasswordEmail",
   components: {
-    Button,
+    ButtonComp,
     GoBack,
   },
   data() {
