@@ -29,16 +29,19 @@
                           label="Felhasználónév"
                           required
                           class="px-12 pt-12"
+                          :rules="nameRules"
                         ></v-text-field>
                         <v-text-field
                           v-model="email"
                           label="Email"
                           required
                           class="px-12"
+                          :rules="emailRules"
                         ></v-text-field>
                         <v-text-field
                           v-model="password"
                           label="Jelszó"
+                          :rules="passwordRules"
                           :type="show1 ? 'text' : 'password'"
                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                           @click:append="show1 = !show1"
@@ -53,6 +56,7 @@
                           @click:append="show2 = !show2"
                           required
                           class="px-12"
+                          :rules="[(password === password2) || 'A két beírt jelszónak egyeznie kell!']"
                         ></v-text-field>
                         <v-file-input
                           accept="image/*"
@@ -117,34 +121,39 @@ export default {
     message: "",
     errorMessage: "",
     FILE: null,
-    rules: {
-        required: value => !!value || "Required.",
-        email: value => {
-          // eslint-disable-next-line
-          const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,20}$/g
-          return (
-            pattern.test(value) ||
-            "Min. 8 characters with at least one capital letter, a number and a special character."
-          );
-        }
-      }
+    nameRules: [
+      (value) => !!value || "A felhasználó nevet köztelező megadni!",
+      (value) => value.length > 2 || "A minimum karakterszám 3!",
+    ],
+    emailRules: [
+      (value) => !!value || "Az email címet kötelező megadni!.",
+      (value) =>
+      // eslint-disable-next-line
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+        "Helytelen email",
+    ],
+    passwordRules: [
+      (value) => !!value || "A jelszót kötelező megadni!.",
+      (value) =>
+      // eslint-disable-next-line
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,20}$/g.test(
+          value
+        ) || "A jelszó, nem felel meg a mintának",
+    ],
   }),
-
   computed: {},
   methods: {
     onFileUpload(event) {
-       console.log(event)
+      console.log(event);
       this.FILE = event;
-     
     },
     handleRegisterForm() {
       const user = new FormData();
-      user.append('userName', this.userName)
-      user.append('email', this.email)
-      user.append('password', this.password)
-      user.append('role', 'user')
-      user.append('userImage', this.FILE)
-
+      user.append("userName", this.userName);
+      user.append("email", this.email);
+      user.append("password", this.password);
+      user.append("role", "user");
+      user.append("userImage", this.FILE);
 
       authService
         .RegisterForm(user)
