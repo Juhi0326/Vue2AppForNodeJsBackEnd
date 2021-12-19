@@ -3,19 +3,19 @@
     <NavBar/>
     <br>
       <router-view></router-view>
-    <Footer />
+    <FooterComp />
   </v-app>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-import Footer from  '../src/components/Footer.vue';
+import FooterComp from  './components/FooterComp.vue';
 export default {
   name: "App",
 
   components: {
     NavBar,
-    Footer
+    FooterComp
   },
 
   data: () => ({}),
