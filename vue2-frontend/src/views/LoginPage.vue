@@ -52,19 +52,27 @@
                       </ButtonComp>
                     </v-col>
                     <v-col>
-                      <v-btn
+                      <ButtonComp
                         class="ma-12"
-                        text
-                        color="primary"
+                        propColor="primary"
+                        :propRounded="true"
+                        :propText="true"
                         @click="goToRegisterFormForm"
                       >
                         Regisztráció
-                      </v-btn>
+                      </ButtonComp>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col>
-                      <v-btn text rounded @click="goToResetPasswordEmail"> Elfelejtett jelszó </v-btn>
+                      <ButtonComp
+                      class="ma-12 mb-4"
+                        :propRounded="true"
+                        :propText="true"
+                        @click="goToResetPasswordEmail"
+                      >
+                        Elfelejtett jelszó
+                      </ButtonComp>
                     </v-col>
                   </v-row>
                   <!-- <v-btn type="submit" class="ma-12">Submit</v-btn> -->
