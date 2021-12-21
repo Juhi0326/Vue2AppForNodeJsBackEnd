@@ -2,7 +2,7 @@
   <v-app id="app">
     <NavBar/>
     <br>
-      <router-view></router-view>
+      <router-view class="container"></router-view>
     <FooterComp />
   </v-app>
 </template>

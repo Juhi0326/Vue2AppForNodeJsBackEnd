@@ -1,9 +1,58 @@
 <template>
-  <div class="container">
-    <h1 v-if="isContent">{{ content.Title.titleDescription }}</h1>
-    <img :src="titleImagePath" alt="" class="responsive" />
-    <h3 v-if="isContent">{{ content.Heading.headingDescription }}</h3>
-    <img :src="headingImagePath" alt="" class="responsive" />
+  <div>
+    <v-card class="mx-auto" v-if="content">
+      <v-img
+        class="white--text align-end"
+        height="200px"
+        :src="titleImagePath"
+        alt=""
+      >
+        <v-card-title v-if="content">{{
+          content.Title.titleDescription
+        }}</v-card-title>
+      </v-img>
+
+      <v-card-subtitle class="pb-0"> Number 10 </v-card-subtitle>
+
+      <v-card-text class="text--primary">
+        <v-row>
+          <v-col>
+            {{ content.Heading.headingDescription }}
+          </v-col>
+        </v-row>
+        <div>Whitehaven Beach</div>
+
+        <div></div>
+      </v-card-text>
+
+      <v-card-actions> </v-card-actions>
+    </v-card>
+
+    <v-card class="mx-auto mt-6" v-intersect="showMoreContent">
+      <v-img
+      v-if="content"
+        class="white--text align-end"
+        height="200px"
+        :src="headingImagePath"
+        alt=""
+      >
+      </v-img>
+
+      <v-card-subtitle class="pb-0"> Number 10 </v-card-subtitle>
+
+      <v-card-text class="text--primary">
+        <v-row v-if="content">
+          <v-col>
+            {{ content.Heading.headingDescription }}
+          </v-col>
+        </v-row>
+        <div>Whitehaven Beach</div>
+
+        <div></div>
+      </v-card-text>
+
+      <v-card-actions> </v-card-actions>
+    </v-card>
   </div>
 </template>
 
@@ -13,22 +62,26 @@ export default {
   name: "HomePage",
   data() {
     return {
-      isContent : false,
+      isContent: false,
       content: null,
       titleImagePath: "",
       headingImagePath: "",
+      loadNewContent: false,
     };
   },
   created() {
     this.getHomePageData();
   },
   methods: {
+    showMoreContent(entries) {
+      this.loadNewContent = entries[0].isIntersecting;
+      console.log(this.loadNewContent);
+    },
     getHomePageData() {
       HomePageService.getHomePage().then(
         (response) => {
           this.content = response.data.HomePage[0];
-          this.isContent = true
-          console.log(this.content);
+          this.isContent = true;
           this.titleImagePath =
             "http://localhost:8081/" + this.content.Title.titleImagePath;
           this.headingImagePath =

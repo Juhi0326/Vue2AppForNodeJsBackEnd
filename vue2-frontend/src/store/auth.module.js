@@ -1,4 +1,5 @@
 import AuthService from '../services/authService';
+import userService from '../services/userService';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
@@ -24,6 +25,15 @@ export const auth = {
         }
       );
     },
+    changeUser({commit}, id) {
+      return userService.getUserById(id).then(
+        myUser => {
+          commit('changeUserSucces', myUser.data);
+          return Promise.resolve(myUser);
+        }
+      )
+      
+    },
     logout({ commit }) {
       AuthService.logout();
       commit('logout');
@@ -45,12 +55,14 @@ export const auth = {
     loginSuccess(state, user) {
       state.status.loggedIn = true;
       state.user = user;
-      console.log(state.status.loggedIn)
-      console.log(state.user)
     },
     loginFailure(state) {
       state.status.loggedIn = false;
       state.user = null;
+    },
+    changeUserSucces(state, user) {
+      console.log(user)
+        state.user = user;
     },
     logout(state) {
       state.status.loggedIn = false;
