@@ -136,8 +136,11 @@ export default {
       errorMessage: "",
       FILE: null,
       nameRules: [
-        (value) => value.length > 2 || "A minimum karakterszám 3!",
-        (value) => value.length < 21 || "A maximum karakterszám 20!",
+        (value) =>
+        // eslint-disable-next-line
+          /^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9/./ /-]{3,20}$/g.test(
+            value
+          ) || " a felhasználó név csak normál karakterekből és számokból állhat, 3-tól 20 karakterig",
       ],
       emailRules: [
         (value) =>

@@ -17,7 +17,11 @@
               max-width="500"
             >
               <v-card class="ma-2">
-                <v-form @submit.prevent="handleRegisterForm" ref="registerForm" v-model="formValidity">
+                <v-form
+                  @submit.prevent="handleRegisterForm"
+                  ref="registerForm"
+                  v-model="formValidity"
+                >
                   <v-img height="250" src="../assets/pen.jpg"></v-img>
                   <v-card-title class="pa-8">Regisztrációs Form</v-card-title>
                   <v-divider> </v-divider>
@@ -56,7 +60,10 @@
                           @click:append="show2 = !show2"
                           required
                           class="px-12"
-                          :rules="[(password === password2) || 'A két beírt jelszónak egyeznie kell!']"
+                          :rules="[
+                            password === password2 ||
+                              'A két beírt jelszónak egyeznie kell!',
+                          ]"
                         ></v-text-field>
                         <v-file-input
                           accept="image/*"
@@ -125,20 +132,22 @@ export default {
     FILE: null,
     nameRules: [
       (value) => !!value || "A felhasználónevet kötelező megadni!",
-      (value) => value.length > 2 || "A minimum karakterszám 3!",
-      (value) => value.length < 21 || "A maximum karakterszám 20!",
+      // eslint-disable-next-line
+      (value) =>
+        /^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9/./ /-]{3,20}$/g.test(value) ||
+        " a felhasználó név csak normál karakterekből és számokból állhat, 3-tól 20 karakterig",
     ],
     emailRules: [
       (value) => !!value || "Az email címet kötelező megadni!.",
       (value) =>
-      // eslint-disable-next-line
+        // eslint-disable-next-line
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
         "Helytelen email",
     ],
     passwordRules: [
       (value) => !!value || "A jelszót kötelező megadni!.",
       (value) =>
-      // eslint-disable-next-line
+        // eslint-disable-next-line
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,20}$/g.test(
           value
         ) || "A jelszó, nem felel meg a mintának",
@@ -176,12 +185,12 @@ export default {
           }
         });
     },
-    checkValidity () {
-      console.log(this.formValidity)
+    checkValidity() {
+      console.log(this.formValidity);
     },
     resetForm() {
-      console.log(this.$refs.registerForm)
-      this.$refs.registerForm.reset()
+      console.log(this.$refs.registerForm);
+      this.$refs.registerForm.reset();
     },
   },
 };
