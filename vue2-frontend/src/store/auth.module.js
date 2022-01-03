@@ -9,12 +9,20 @@ const initialState = user
 export const auth = {
   namespaced: true,
   state: initialState,
+  getters: {
+    activeUser: state => {
+      return state.user
+    },
+    loginStatus: state => {
+      return state.status
+    }
+  },
   actions: {
-    
+
     login({ commit }, user) {
- 
+
       return AuthService.login(user).then(
-        
+
         user => {
           commit('loginSuccess', user);
           return Promise.resolve(user);
@@ -25,14 +33,14 @@ export const auth = {
         }
       );
     },
-    changeUser({commit}, id) {
+    changeUser({ commit }, id) {
       return userService.getUserById(id).then(
         myUser => {
           commit('changeUserSucces', myUser.data);
           return Promise.resolve(myUser);
         }
       )
-      
+
     },
     logout({ commit }) {
       AuthService.logout();
@@ -62,7 +70,7 @@ export const auth = {
     },
     changeUserSucces(state, user) {
       console.log(user)
-        state.user = user;
+      state.user = user;
     },
     logout(state) {
       state.status.loggedIn = false;

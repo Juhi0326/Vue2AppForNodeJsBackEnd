@@ -134,7 +134,7 @@ export default {
       (value) => !!value || "A felhasználónevet kötelező megadni!",
       // eslint-disable-next-line
       (value) =>
-        /^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9/./ /-]{3,20}$/g.test(value) ||
+        /^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9-]{3,20}$/g.test(value) ||
         " a felhasználó név csak normál karakterekből és számokból állhat, 3-tól 20 karakterig",
     ],
     emailRules: [

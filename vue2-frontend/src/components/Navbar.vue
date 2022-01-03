@@ -53,7 +53,6 @@
             <v-img :src="userImage"></v-img>
           </v-list-item-avatar>
         </v-list-item>
-
         <v-list-item link>
           <v-list-item-content>
             <v-list-item-title class="text-h6" v-if="currentUser">
@@ -119,30 +118,36 @@ export default {
     },
   },
   computed: {
+    activeUser() {
+     return  this.$store.getters['auth/activeUser']
+    },
+    loginStatus() {
+      return  this.$store.getters['auth/loginStatus']
+    },
     isMobile() {
       return this.$vuetify.breakpoint.xsOnly;
     },
     loggedIn() {
-      if (this.$store.state.auth.status.loggedIn) {
-        return this.$store.state.auth.status.loggedIn;
+      if (this.loginStatus) {
+        return this.loginStatus.loggedIn;
       }
       return false;
     },
     currentUser() {
-      if (this.$store.state.auth.user) {
-        return this.$store.state.auth.user.userName;
+      if (this.activeUser) {
+        return this.activeUser.userName;
       }
       return null;
     },
     userImage() {
-      if (this.$store.state.auth.user) {
-        return "http://localhost:8081/" + this.$store.state.auth.user.userImage;
+      if (this.activeUser) {
+        return "http://localhost:8081/" + this.activeUser.userImage;
       }
       return null;
     },
     userRole() {
-      if (this.$store.state.auth.user) {
-        return this.$store.state.auth.user.role;
+      if (this.activeUser) {
+        return this.activeUser.role;
       }
       return null;
     },

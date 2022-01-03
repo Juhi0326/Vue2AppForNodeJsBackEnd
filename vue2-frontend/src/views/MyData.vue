@@ -32,7 +32,11 @@
                 Elég csak azt a mezőt kitölteni, amit módosítani szeretnél!
               </v-card-subtitle>
 
-              <v-form @submit.prevent="changData" ref="changeDataForm" v-model="formValidity">
+              <v-form
+                @submit.prevent="changData"
+                ref="changeDataForm"
+                v-model="formValidity"
+              >
                 <div>
                   <v-row>
                     <v-col>
@@ -90,7 +94,7 @@
                     </ButtonComp>
                   </v-col>
                 </v-row>
-                <v-row>{{formValidity}}</v-row>
+                <v-row>{{ formValidity }}</v-row>
                 <v-row v-if="errorMessage" class="px-12 pt-12 red--text">
                   <v-col>
                     {{ errorMessage }}
@@ -136,11 +140,16 @@ export default {
       errorMessage: "",
       FILE: null,
       nameRules: [
-        (value) =>
-        // eslint-disable-next-line
-          /^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9/./ /-]{3,20}$/g.test(
-            value
-          ) || " a felhasználó név csak normál karakterekből és számokból állhat, 3-tól 20 karakterig",
+        (value) => {
+          if (!value) {
+            return true;
+          } else {
+            return (
+              /^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9-]{3,20}$/g.test(value) ||
+              " a felhasználó név csak normál karakterekből és számokból állhat, 3-tól 20 karakterig"
+            );
+          }
+        },
       ],
       emailRules: [
         (value) =>
@@ -190,14 +199,14 @@ export default {
         user.append("userImage", this.FILE);
         console.log("hozzáadtam a képet a változott mezőkhöz");
       }
-      
+
       //this.resetForm()
       try {
-        await userService.changeMyDataById(id, user).then(()=> {
-          this.getMyData()
-          this.resetForm()
-          this.$store.dispatch("auth/changeUser", id)
-        })
+        await userService.changeMyDataById(id, user).then(() => {
+          this.getMyData();
+          this.resetForm();
+          this.$store.dispatch("auth/changeUser", id);
+        });
       } catch (error) {
         console.log(error);
       }
