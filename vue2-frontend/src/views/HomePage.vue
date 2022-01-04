@@ -28,7 +28,9 @@
       <v-card-actions> </v-card-actions>
     </v-card>
 
-    <v-card class="mx-auto mt-6" v-intersect="showMoreContent">
+    <div v-else> a szerver nem elérhető!</div>
+
+    <v-card class="mx-auto mt-6" v-intersect="showMoreContent" v-if="content">
       <v-img
       v-if="content"
         class="white--text align-end"

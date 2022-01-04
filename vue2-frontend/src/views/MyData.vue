@@ -66,6 +66,7 @@
                         label="Jelszó újra"
                         :type="show2 ? 'text' : 'password'"
                         :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                        @click:append="show2 = !show2"
                         class="px-12"
                         :rules="[
                           password === password2 ||
@@ -89,12 +90,12 @@
                       :propRounded="true"
                       :propDark="true"
                       type="submit"
+                      :propDisabled="!formValidation"
                     >
                       Elküldöm a módosítást!
                     </ButtonComp>
                   </v-col>
                 </v-row>
-                <v-row>{{ formValidity }}</v-row>
                 <v-row v-if="errorMessage" class="px-12 pt-12 red--text">
                   <v-col>
                     {{ errorMessage }}
@@ -145,24 +146,39 @@ export default {
             return true;
           } else {
             return (
-              /^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9-]{3,20}$/g.test(value) ||
-              " a felhasználó név csak normál karakterekből és számokból állhat, 3-tól 20 karakterig"
+              // eslint-disable-next-line
+              /^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9-. ]{3,20}$/g.test(value) ||
+              " a felhasználó név csak normál karakterekből és számokból állhat (a pont és a szóköz engedélyezett), 3-tól 20 karakterig"
             );
           }
         },
       ],
       emailRules: [
-        (value) =>
-          // eslint-disable-next-line
-          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-          "Helytelen email",
+        (value) => {
+          if (!value) {
+            return true;
+          } else {
+            return (
+              // eslint-disable-next-line
+              /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+              "Helytelen email"
+            );
+          }
+        },
       ],
       passwordRules: [
-        (value) =>
-          // eslint-disable-next-line
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,20}$/g.test(
-            value
-          ) || "A jelszó, nem felel meg a mintának",
+        (value) => {
+          if (!value) {
+            return true;
+          } else {
+            return (
+              // eslint-disable-next-line
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,20}$/g.test(
+                value
+              ) || "A jelszó, nem felel meg a mintának"
+            );
+          }
+        },
       ],
     };
   },
@@ -222,7 +238,30 @@ export default {
     this.getMyData();
   },
 
-  computed: {},
+  computed: {
+    formValidation() {
+      let fieldCounter = 0;
+      let userNameCount = 0;
+      let emailCount = 0;
+      let passwordCount = 0;
+      let password2Count = 0;
+      let FILECount = 0;
+      this.userName !== "" ? (userNameCount = 1) : (userNameCount = 0);
+      this.email !== "" ? (emailCount = 1) : (emailCount = 0);
+      this.password !== "" ? (passwordCount = 1) : (passwordCount = 0);
+      this.password2 !== "" ? (password2Count = 1) : (password2Count = 0);
+      this.FILE !== null ? (FILECount = 1) : (FILECount = 0);
+
+      fieldCounter =
+        userNameCount + emailCount + passwordCount + password2Count + FILECount
+
+      if (fieldCounter > 0 && this.formValidity === true) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
 };
 </script>
 
