@@ -80,7 +80,7 @@
                         class="ma-12"
                         propColor="red"
                         :propRounded="true"
-                        :propDark="true"
+                        :propDark="formValidity"
                         type="submit"
                         :propDisabled="!formValidity"
                       >

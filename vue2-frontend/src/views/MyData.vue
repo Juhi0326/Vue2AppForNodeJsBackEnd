@@ -88,7 +88,7 @@
                       class="ma-12"
                       propColor="red"
                       :propRounded="true"
-                      :propDark="true"
+                      :propDark="formValidation"
                       type="submit"
                       :propDisabled="!formValidation"
                     >

@@ -7,7 +7,7 @@
     :class="propClass"
     :outlined="PropOutlined"
     :text="propText"
-    :disabled="propDisabled"
+    :disabled="propDisabled" 
   >
     <slot></slot>
   </v-btn>
