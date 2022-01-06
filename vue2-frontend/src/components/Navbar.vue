@@ -97,9 +97,14 @@ export default {
     login() {
       this.$router.push("/login");
     },
-    logout() {
-      this.$store.dispatch("auth/logout");
-      this.$router.push("/");
+    async logout() {
+      try {
+        await this.$store.dispatch("cart/clearCart");
+        await this.$store.dispatch("auth/logout");
+         this.$router.push("/");
+      } catch (error) {
+        console.log(error)
+      }
     },
     goToProductsPage() {
       this.$router.push("/products");

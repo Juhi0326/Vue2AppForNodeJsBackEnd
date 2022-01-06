@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      content: [],
+      content: {},
       productId: null,
       images: [],
       role: "guest",
@@ -89,10 +89,12 @@ export default {
   methods: {
     AddToCart() {
       console.log("hozzáadtam");
+      this.$store.dispatch("cart/addProduct", this.content, 1);
     },
     async getProduct(productId) {
       await productService.getProductById(productId).then((response) => {
         this.content = response.data.product;
+        console.log(this.content);
         this.content.price = this.formatMoney(this.content.price);
         this.content.discountedPrice = this.formatMoney(
           this.content.discountedPrice

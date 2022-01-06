@@ -37,6 +37,12 @@ const routes = [
       import(/* webpackChunkName: "AddNewPassword" */ '../views/AddNewPassword'),
   },
   {
+    path: '/users/shopping-cart',
+    name: 'ShoppingCart',
+    component: () =>
+      import(/* webpackChunkName: "ShoppingCart" */ '../views/ShoppingCart'),
+  },
+  {
     path: '/products',
     name: 'ProductsPage',
     component: () =>
