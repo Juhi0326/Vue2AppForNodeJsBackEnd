@@ -53,7 +53,6 @@ const routes = [
     name: "ProductDetails",
     component: () =>
       import(/* webpackChunkName: "ProductDetails" */ '../views/ProductDetails'),
-    meta: { authorize: ['user','moderator', 'admin'] }
   },
   {
     path: '/mydata/:id',

@@ -96,6 +96,7 @@ export default {
     async getProduct(productId) {
       await productService.getProductById(productId).then((response) => {
         this.content = response.data.product;
+        console.log(this.content)
         this.content.price = this.formatMoney(this.content.price);
         this.content.discountedPrice = this.formatMoney(
           this.content.discountedPrice
@@ -112,7 +113,9 @@ export default {
       return `${value} Ft`;
     },
     getRole() {
-      this.role = this.$store.state.auth.user.role;
+      if (this.$store.state.auth.user) {
+        this.role = this.$store.state.auth.user.role
+      } 
     },
   },
 };
