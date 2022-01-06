@@ -10,17 +10,14 @@ export const cart = {
         }
     },
     actions: {
-        addProduct({ commit, getters }, product, quantity) {
+        addProduct({ commit, getters }, product) {
+
             let products = getters.getCartItems
             let productIndex = lodash.findIndex(getters.getCartItems, function (o) { return o._id === product._id; });
             if (productIndex < 0) {
-                console.log('nem volr találat, hozzáadható az új product a kosárhoz')
                 products.push(product)
-                console.log(quantity)
-
             } else {
-                let productQuantity = parseInt(getters.getCartItems[productIndex].quantity) + 1
-                console.log("a termék már benne volt az új mennyiség: " + productQuantity)
+                products[productIndex].quantity = products[productIndex].quantity + product.quantity
             }
             localStorage.setItem('cartItems', JSON.stringify(products));
             commit('ADD_PRODUCT', products)
