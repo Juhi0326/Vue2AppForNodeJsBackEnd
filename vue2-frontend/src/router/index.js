@@ -41,6 +41,7 @@ const routes = [
     name: 'ShoppingCart',
     component: () =>
       import(/* webpackChunkName: "ShoppingCart" */ '../views/ShoppingCart'),
+    meta: { authorize: ['user', 'moderator', 'admin'] }
   },
   {
     path: '/products',

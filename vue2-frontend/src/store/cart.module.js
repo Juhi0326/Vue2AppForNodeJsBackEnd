@@ -1,6 +1,8 @@
 const lodash = require('lodash');
 const {getSumQuantity, getSubtotal, getSumCharge} = require('../services/cartService')
 const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+
+
 const initialState = cartItems ? cartItems : []
 export const cart = {
     namespaced: true,

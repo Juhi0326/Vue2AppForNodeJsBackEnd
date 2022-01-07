@@ -22,7 +22,12 @@
         <v-spacer></v-spacer>
         <v-tooltip bottom v-if="this.$route.name !== 'ProductsPage'">
           <template v-slot:activator="{ on, attrs }">
-            <v-icon v-bind="attrs" v-on="on" @click="goToProductsPage" class="ma-3">
+            <v-icon
+              v-bind="attrs"
+              v-on="on"
+              @click="goToProductsPage"
+              class="ma-3"
+            >
               mdi-rugby
             </v-icon>
           </template>
@@ -43,11 +48,19 @@
           <span>Főoldal</span>
         </v-tooltip>
 
-        <v-tooltip bottom v-if="loggedIn">
+        <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <v-icon v-bind="attrs" v-on="on" @click="goToCartPage" class="ma-3">
-              mdi-cart-variant
-            </v-icon>
+            <v-btn text
+              > <span v-show="cartItems>0"> {{cartItems}}</span>
+              <v-icon
+                v-bind="attrs"
+                v-on="on"
+                @click="goToCartPage"
+                class="ma-3"
+              >
+                mdi-cart-variant
+              </v-icon>
+            </v-btn>
           </template>
           <span>Kosár</span>
         </v-tooltip>
@@ -158,6 +171,10 @@ export default {
     loginStatus() {
       return this.$store.getters["auth/loginStatus"];
     },
+    cartItems () {
+      return this.$store.getters["cart/SumOfQuantity"];
+    },
+
     isMobile() {
       return this.$vuetify.breakpoint.xsOnly;
     },
