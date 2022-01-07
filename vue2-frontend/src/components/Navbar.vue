@@ -2,31 +2,9 @@
   <div>
     <div id="app">
       <v-app-bar color="red" dark>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-        <v-spacer></v-spacer>
-        <v-btn
-          text
-          color="white"
-          @click="goToProductsPage"
-          v-if="this.$route.name !== 'Products'"
-          >Termék lista</v-btn
-        >
-        <v-btn
-          text
-          color="white"
-          @click="goToHomePagePage"
-          v-if="this.$route.name !== 'HomePage'"
-          >Főoldal</v-btn
-        >
-        <v-btn text color="white" @click="login" v-if="!loggedIn"
-          >Bejelentkezés</v-btn
-        >
-        <v-menu left bottom v-if="userRole === 'admin'">
+        <v-menu left bottom v-if="userRole === 'admin' && isMobile">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn text color="white" v-bind="attrs" v-on="on">
-              Admin funkciók
-            </v-btn>
+            <v-btn text color="white" v-bind="attrs" v-on="on"> Admin </v-btn>
           </template>
 
           <v-list>
@@ -40,9 +18,58 @@
             </v-list-item>
           </v-list>
         </v-menu>
-        <v-btn text color="white" @click="logout" v-if="loggedIn"
-          >Kijelentkezés</v-btn
-        >
+
+        <v-spacer></v-spacer>
+        <v-tooltip bottom v-if="this.$route.name !== 'ProductsPage'">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon v-bind="attrs" v-on="on" @click="goToProductsPage" class="ma-3">
+              mdi-rugby
+            </v-icon>
+          </template>
+          <span>Termékek</span>
+        </v-tooltip>
+
+        <v-tooltip bottom v-if="this.$route.name !== 'HomePage'">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon
+              v-bind="attrs"
+              v-on="on"
+              @click="goToHomePagePage"
+              class="ma-3"
+            >
+              mdi-home
+            </v-icon>
+          </template>
+          <span>Főoldal</span>
+        </v-tooltip>
+
+        <v-tooltip bottom v-if="loggedIn">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon v-bind="attrs" v-on="on" @click="goToCartPage" class="ma-3">
+              mdi-cart-variant
+            </v-icon>
+          </template>
+          <span>Kosár</span>
+        </v-tooltip>
+        <v-spacer></v-spacer>
+
+        <v-tooltip bottom v-if="!loggedIn">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon v-bind="attrs" v-on="on" @click="login">
+              mdi-door-closed-lock
+            </v-icon>
+          </template>
+          <span>Bejelentkezés</span>
+        </v-tooltip>
+
+        <v-tooltip bottom v-if="loggedIn">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon v-bind="attrs" v-on="on" @click="logout">
+              mdi-logout
+            </v-icon>
+          </template>
+          <span>Kijelentkezés</span>
+        </v-tooltip>
       </v-app-bar>
     </div>
 
@@ -92,7 +119,6 @@
 
 <script>
 export default {
-
   methods: {
     login() {
       this.$router.push("/login");
@@ -101,9 +127,9 @@ export default {
       try {
         await this.$store.dispatch("cart/clearCart");
         await this.$store.dispatch("auth/logout");
-         this.$router.push("/");
+        this.$router.push("/");
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
     goToProductsPage() {
@@ -118,16 +144,19 @@ export default {
     goToAdminDashboard() {
       this.$router.push("/admin/admin-dashboard");
     },
+    goToCartPage() {
+      this.$router.push("/users/shopping-cart");
+    },
     goTo(route) {
       this.$router.push(route);
     },
   },
   computed: {
     activeUser() {
-     return  this.$store.getters['auth/activeUser']
+      return this.$store.getters["auth/activeUser"];
     },
     loginStatus() {
-      return  this.$store.getters['auth/loginStatus']
+      return this.$store.getters["auth/loginStatus"];
     },
     isMobile() {
       return this.$vuetify.breakpoint.xsOnly;
@@ -168,7 +197,7 @@ export default {
           title: "Felhasználók kezelése",
           src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
           flex: 6,
-          route: '/admin/user-list'
+          route: "/admin/user-list",
         },
         {
           title: "Rendelések",

@@ -49,9 +49,10 @@ export const cart = {
         ADD_PRODUCT(state, products) {
             state = products
         },
-        CLEAR_CART(state, products) {
-            state = [];
-            console.log(products)
+        CLEAR_CART({state}, products) {
+            state = products;
+            console.log(state)
+           
         }
     }
 
