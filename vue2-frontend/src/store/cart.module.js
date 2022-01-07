@@ -44,7 +44,7 @@ export const cart = {
         },
         clearCart({ commit }) {
 
-            commit('CLEAR_CART', [])
+            commit('CLEAR_CART', [{}])
         }
     },
     mutations: {

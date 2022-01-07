@@ -40,7 +40,7 @@
               v-bind="attrs"
               v-on="on"
               @click="goToHomePagePage"
-              class="ma-3"
+              class="ml-3 mr-1"
             >
               mdi-home
             </v-icon>
@@ -51,15 +51,15 @@
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-btn text
-              > <span v-show="cartItems>0"> {{cartItems}}</span>
+              > 
               <v-icon
                 v-bind="attrs"
                 v-on="on"
                 @click="goToCartPage"
-                class="ma-3"
               >
                 mdi-cart-variant
               </v-icon>
+              <span v-show="cartItems>0"> {{cartItems}}</span>
             </v-btn>
           </template>
           <span>Kosár</span>
