@@ -2,11 +2,6 @@
   <div>
     <v-app id="inspire" class="container">
       <v-row>
-        <v-col cols="3">
-          <GoBack />
-        </v-col>
-      </v-row>
-      <v-row>
         <v-col cols="2"></v-col>
         <v-col cols="12" sm="8">
           <div>
@@ -67,13 +62,12 @@
 
 <script>
 import ButtonComp from "../components/ButtonComp.vue";
-import GoBack from "../components/GoBack.vue";
+
 import authService from "../services/authService";
 export default {
   name: "ResetPasswordEmail",
   components: {
     ButtonComp,
-    GoBack,
   },
   data() {
     return {

@@ -2,11 +2,6 @@
   <div id="app">
     <v-app id="inspire" class="container">
       <v-row>
-        <v-col cols="3">
-          <GoBack />
-        </v-col>
-      </v-row>
-      <v-row>
         <v-col cols="4"> </v-col>
         <v-col cols="12" sm="8" md="6">
           <div>
@@ -95,13 +90,12 @@
 </template>
 
 <script>
-import GoBack from "../../components/GoBack.vue";
+
 import ButtonComp from "../../components/ButtonComp.vue";
 import productService from "../../services/productSevice";
 export default {
   name: "AddNewProduct",
   components: {
-    GoBack,
     ButtonComp,
   },
   data: () => ({

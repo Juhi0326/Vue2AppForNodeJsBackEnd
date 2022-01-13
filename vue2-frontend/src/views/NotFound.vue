@@ -7,17 +7,15 @@
         <v-img src="../assets/404.jpg" class="my-12"></v-img>
       </v-col>
     </v-row>
-
-    <GoBack />
   </div>
 </template>
 
 <script>
-import GoBack from "../components/GoBack.vue";
+
 export default {
   name: 'NotFound',  
   components: {
-    GoBack,
+
   },
 };
 </script>

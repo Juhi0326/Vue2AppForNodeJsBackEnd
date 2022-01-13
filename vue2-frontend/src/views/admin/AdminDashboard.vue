@@ -26,16 +26,14 @@
         </v-row>
       </v-container>
     </v-card>
-    <GoBack />
   </div>
 </template>
 
 <script>
-import GoBack from "../../components/GoBack.vue";
+
 export default {
   name: "AdminDashboard",
   components: {
-    GoBack,
   },
   data: () => ({
     cards: [

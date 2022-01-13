@@ -38,9 +38,6 @@
           </v-card>
         </v-app>
       </v-col>
-      <v-col cols="1">
-        <GoBack />
-      </v-col>
     </v-row>
   </div>
 </template>
@@ -48,12 +45,10 @@
 <script>
 import productService from "../services/productSevice";
 import ButtonComp from "../components/ButtonComp.vue";
-import GoBack from "../components/GoBack.vue";
 export default {
   name: "ProductDetails",
   components: {
     ButtonComp,
-    GoBack,
   },
   data() {
     return {

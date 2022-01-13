@@ -2,7 +2,6 @@
   <div>
     <v-row>
       <v-col cols="8"></v-col>
-      <v-col cols="12" lg="4"> <GoBack /> </v-col>
     </v-row>
     <v-row>
       <v-col cols="12">
@@ -117,13 +116,11 @@
 </template>
 
 <script>
-import GoBack from "../components/GoBack.vue";
 import userService from "../services/userService";
 import ButtonComp from "../components/ButtonComp.vue";
 export default {
   name: "MyData",
   components: {
-    GoBack,
     ButtonComp,
   },
   data() {
