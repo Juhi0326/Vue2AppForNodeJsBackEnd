@@ -2,11 +2,6 @@
   <div id="app">
     <v-app id="inspire" class="container">
       <v-row>
-        <v-col cols="3">
-          <GoBack />
-        </v-col>
-      </v-row>
-      <v-row>
         <v-col cols="12" sm="8">
           <div>
             <v-card class="d-flex justify-center mb-6" flat tile>
@@ -88,12 +83,12 @@
 
 <script>
 import ButtonComp from "../components/ButtonComp.vue";
-import GoBack from "../components/GoBack.vue";
+
 export default {
   name: "LoginPage",
   components: {
     ButtonComp,
-    GoBack,
+
   },
   data() {
     return {

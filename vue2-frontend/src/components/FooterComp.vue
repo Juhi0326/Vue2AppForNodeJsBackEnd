@@ -1,13 +1,32 @@
 <template>
-  <div id="app">
+  <div id="app" >
   <v-app id="inspire">
     <v-footer
-      
-      padless
+      color="red"
+      dark
       fixed
     >
+    
     <div class="container">
-      © 2021 Copyright: István Juhász
+      <div>
+        <v-row>
+          <v-col cols="2">
+            
+          </v-col>  
+        </v-row>
+        <v-row>
+          <v-col>
+
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col>
+            <v-btn rounded light @click="$router.back()"> Visszalépek</v-btn>
+          </v-col>
+
+        </v-row>
+        
+      </div>
+      
       </div>
     </v-footer>
   </v-app>
@@ -21,5 +40,4 @@ export default {
 </script>
 
 <style>
-
 </style>

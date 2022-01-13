@@ -138,7 +138,7 @@ export default {
     },
     async logout() {
       try {
-        await this.$store.dispatch("cart/clearCart");
+        await this.$store.dispatch("cart2/clearCart");
         await this.$store.dispatch("auth/logout");
         this.$router.push("/");
       } catch (error) {
@@ -172,7 +172,7 @@ export default {
       return this.$store.getters["auth/loginStatus"];
     },
     cartItems () {
-      return this.$store.getters["cart/SumOfQuantity"];
+      return this.$store.getters["cart2/SumOfQuantity"];
     },
 
     isMobile() {
