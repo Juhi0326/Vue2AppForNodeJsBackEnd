@@ -39,21 +39,15 @@
                 </v-col>
                 <v-col>
                   <v-text-field
-                  v-model="quantity"
+                    v-model="quantity"
                     solo
                     disabled
                     outlined
                   ></v-text-field>
                 </v-col>
                 <v-col>
-                  <v-btn @click="increase"
-                    >+</v-btn
-                  >
-                  <v-btn
-                    @click="decrease"
-                    class="ml-2"
-                    >-</v-btn
-                  ></v-col
+                  <v-btn @click="increase">+</v-btn>
+                  <v-btn @click="decrease" class="ml-2">-</v-btn></v-col
                 >
               </v-row>
             </v-card-actions>
@@ -107,9 +101,9 @@ export default {
   methods: {
     AddToCart() {
       let product = {};
-      Object.assign(product, this.content, {quantity: this.quantity});
+      Object.assign(product, this.content, { quantity: this.quantity });
       this.$store.dispatch("cart2/addProduct2", product);
-      this.quantity=1
+      this.quantity = 1;
     },
     async getProduct(productId) {
       await productService.getProductById(productId).then((response) => {
@@ -131,11 +125,11 @@ export default {
       return `${value} Ft`;
     },
     increase() {
-      this.quantity++
+      this.quantity++;
     },
     decrease() {
       if (this.quantity > 1) {
-        this.quantity--
+        this.quantity--;
       }
     },
     getRole() {
