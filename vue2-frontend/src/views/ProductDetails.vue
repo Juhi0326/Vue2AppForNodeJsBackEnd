@@ -24,16 +24,38 @@
               A kedvezmény mértéke: {{ Product.discountPercentage }}%
             </v-card-text>
             <v-card-actions>
-              <ButtonComp
-                v-if="role === 'user' || role === 'admin'"
-                @click="AddToCart"
-                class="ma-2"
-                propColor="red"
-                :propRounded="true"
-                :propDark="true"
-              >
-                Beteszem a kosárba
-              </ButtonComp>
+              <v-row>
+                <v-col>
+                  <ButtonComp
+                    v-if="role === 'user' || role === 'admin'"
+                    @click="AddToCart"
+                    class="ma-2"
+                    propColor="red"
+                    :propRounded="true"
+                    :propDark="true"
+                  >
+                    Beteszem a kosárba
+                  </ButtonComp>
+                </v-col>
+                <v-col>
+                  <v-text-field
+                  v-model="quantity"
+                    solo
+                    disabled
+                    outlined
+                  ></v-text-field>
+                </v-col>
+                <v-col>
+                  <v-btn @click="increase"
+                    >+</v-btn
+                  >
+                  <v-btn
+                    @click="decrease"
+                    class="ml-2"
+                    >-</v-btn
+                  ></v-col
+                >
+              </v-row>
             </v-card-actions>
           </v-card>
         </v-app>
@@ -56,6 +78,7 @@ export default {
       productId: null,
       images: [],
       role: "guest",
+      quantity: 1,
       //modalOpen: true,
     };
   },
@@ -83,15 +106,14 @@ export default {
 
   methods: {
     AddToCart() {
-     let quantity = {quantity: 1}
-     let product = {}
-     Object.assign(product, this.content, quantity)
+      let product = {};
+      Object.assign(product, this.content, {quantity: this.quantity});
       this.$store.dispatch("cart2/addProduct2", product);
     },
     async getProduct(productId) {
       await productService.getProductById(productId).then((response) => {
         this.content = response.data.product;
-        console.log(this.content)
+        console.log(this.content);
         this.content.price = this.formatMoney(this.content.price);
         this.content.discountedPrice = this.formatMoney(
           this.content.discountedPrice
@@ -107,10 +129,18 @@ export default {
       });
       return `${value} Ft`;
     },
+    increase() {
+      this.quantity++
+    },
+    decrease() {
+      if (this.quantity > 1) {
+        this.quantity--
+      }
+    },
     getRole() {
       if (this.$store.state.auth.user) {
-        this.role = this.$store.state.auth.user.role
-      } 
+        this.role = this.$store.state.auth.user.role;
+      }
     },
   },
 };

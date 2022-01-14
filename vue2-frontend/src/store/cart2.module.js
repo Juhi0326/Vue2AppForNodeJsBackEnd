@@ -26,29 +26,40 @@ export const cart2 = {
     },
     actions: {
         addProduct2({ commit, getters }, product) {
-
-            console.log('ide jön be, ez az action 2-ből jön: ' + product)
+            
             let products =  getters.getCartItems2
-            console.log('ez az első products object: ' + products)
+            
             let productIndex = lodash.findIndex(getters.getCartItems2, function (o) { return o._id === product._id; });
             if (productIndex < 0) {
                 let subi = getSubtotal(product)
-                console.log('ez a subi: ' + subi)
                 product = { ...product, ...{ subTotal: subi } }
-                console.log('Ez a mergelt product: ' + product.subTotal + 'és a diccounted price: ' + product.discountedPrice)
                 products.push(product)
             } else {
                 products[productIndex].quantity = products[productIndex].quantity + product.quantity
                 let subTotal = getSubtotal(products[productIndex])
-                console.log('ez a részösszeg: ' + subTotal)
                 products[productIndex].subTotal = subTotal
             }
             localStorage.setItem('cartItems2', JSON.stringify({items:products}));
             
             commit('ADD_PRODUCT', products)
         },
-        deleteProduct({ commit }, product) {
-            commit('DELETE_PRODUCT', product)
+        changeQuantityOfProductById({ commit, getters }, payload) {
+            let productId = payload.productId
+            let quantity = payload.quantity
+            let products =  getters.getCartItems2
+            let productIndex = lodash.findIndex(getters.getCartItems2, function (o) { return o._id === productId; });
+            if (productIndex < 0) {
+                console.log('nincs ilyen product id')
+            } else {
+                products[productIndex].quantity = quantity
+                let subTotal = getSubtotal(products[productIndex])
+                products[productIndex].subTotal = subTotal
+                localStorage.setItem('cartItems2', JSON.stringify({items:products}));
+                commit('CHANGE_QUANTITY_OF_PRODUCTS_BY_ID', products)
+            }
+        },
+        deleteProductById({ commit }, productId) {
+            commit('DELETE_PRODUCT', productId)
         },
         clearCart({ commit }) {
             commit('CLEAR_CART')
@@ -58,12 +69,15 @@ export const cart2 = {
         ADD_PRODUCT(state, products) {
             state = products
         },
+        CHANGE_QUANTITY_OF_PRODUCTS_BY_ID(state, products) {
+            state = products
+        },
         CLEAR_CART( state) {
             Object.assign(state, getDefaultState())
         },
-        DELETE_PRODUCT( state, product) {
+        DELETE_PRODUCT( state, productId) {
             state.items = state.items.filter( item => {
-                return item._id !== product._id
+                return item._id !== productId
             })
         }
     }
