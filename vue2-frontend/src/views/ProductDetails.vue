@@ -109,6 +109,7 @@ export default {
       let product = {};
       Object.assign(product, this.content, {quantity: this.quantity});
       this.$store.dispatch("cart2/addProduct2", product);
+      this.quantity=1
     },
     async getProduct(productId) {
       await productService.getProductById(productId).then((response) => {
