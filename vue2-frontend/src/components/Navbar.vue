@@ -140,7 +140,7 @@ export default {
     async logout() {
       const user = this.$store.getters['auth/activeUser']
       console.log(user.userId)
-      const payload =JSON.stringify(this.$store.getters['cart2/getState'])
+      const payload =this.$store.getters['cart2/getState']
 
       try {
         await userService.changeCartByUserId(user.userId, payload)

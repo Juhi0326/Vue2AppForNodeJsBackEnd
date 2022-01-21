@@ -28,6 +28,11 @@ export const cart2 = {
         }
     },
     actions: {
+        fillCartFromDb({commit}, payload) {
+            console.log('ez az actions-ból jön: ' + payload.items[0].name)
+            localStorage.setItem('cartItems2', payload);
+            commit('FILL_CART_FROM_DB', payload)
+        },
         addProduct2({ commit, getters }, product) {
             let products =  getters.getCartItems2
             let productIndex = lodash.findIndex(getters.getCartItems2, function (o) { return o._id === product._id; });
@@ -67,6 +72,9 @@ export const cart2 = {
         }
     },
     mutations: {
+        FILL_CART_FROM_DB(state, payload) {
+            Object.assign(state,payload)
+        },
         ADD_PRODUCT(state, products) {
             state = products
         },

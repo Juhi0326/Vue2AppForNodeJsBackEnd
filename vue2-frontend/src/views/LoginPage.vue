@@ -61,7 +61,7 @@
                   <v-row>
                     <v-col>
                       <ButtonComp
-                      class="ma-12 mb-4"
+                        class="ma-12 mb-4"
                         :propRounded="true"
                         :propText="true"
                         @click="goToResetPasswordEmail"
@@ -83,12 +83,12 @@
 
 <script>
 import ButtonComp from "../components/ButtonComp.vue";
+import userService from "../services/userService";
 
 export default {
   name: "LoginPage",
   components: {
     ButtonComp,
-
   },
   data() {
     return {
@@ -106,8 +106,12 @@ export default {
       };
 
       this.$store.dispatch("auth/login", user).then(
-        () => {
-          this.$router.push("/");
+        (user) => {
+          userService.getCartbyUserId(user.userId).then((response) => {
+            console.log(response.data.cart);
+             this.$store.dispatch("cart2/fillCartFromDb", response.data.cart);
+            this.$router.push("/");
+          });
         },
         (error) => {
           console.log(error);
