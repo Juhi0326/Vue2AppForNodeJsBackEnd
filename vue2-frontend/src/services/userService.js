@@ -11,7 +11,6 @@ class UserService {
            return error
         }
     }
-
     getUserById(userId) {
         console.log(API_URL + '/' + userId)
         try {
@@ -20,9 +19,22 @@ class UserService {
             console.log(error)
             return error
         }
-
     }
-
+    getCartbyUserId(userId) {
+        try {
+            return axios.get(API_URL + '/cart/' + userId, { headers: authHeader() });
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    }
+    changeCartByUserId(userId, payload) {
+        try {
+            return axios.patch(API_URL + '/cart/' + userId , payload, { headers: authHeader() } )
+        } catch (error) {
+            return error
+        }
+    }
     deleteUserById(id) {
         try {
             return axios.delete(API_URL + '/' + id , { headers: authHeader() })

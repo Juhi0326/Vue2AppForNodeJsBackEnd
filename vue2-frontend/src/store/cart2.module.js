@@ -26,9 +26,7 @@ export const cart2 = {
     },
     actions: {
         addProduct2({ commit, getters }, product) {
-            
             let products =  getters.getCartItems2
-            
             let productIndex = lodash.findIndex(getters.getCartItems2, function (o) { return o._id === product._id; });
             if (productIndex < 0) {
                 let subi = getSubtotal(product)
@@ -72,7 +70,7 @@ export const cart2 = {
         CHANGE_QUANTITY_OF_PRODUCTS_BY_ID(state, products) {
             state = products
         },
-        CLEAR_CART( state) {
+        CLEAR_CART(state) {
             Object.assign(state, getDefaultState())
         },
         DELETE_PRODUCT( state, productId) {
