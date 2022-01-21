@@ -74,6 +74,7 @@ export const cart2 = {
     mutations: {
         FILL_CART_FROM_DB(state, payload) {
             Object.assign(state,payload)
+            localStorage.setItem('cartItems2', JSON.stringify(state));
         },
         ADD_PRODUCT(state, products) {
             state = products
