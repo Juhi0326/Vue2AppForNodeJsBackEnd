@@ -43,7 +43,7 @@ export const auth = {
 
     },
     logout({ commit }) {
-      AuthService.logout();
+      //AuthService.logout();
       commit('logout');
     },
     RegisterForm({ commit }, user) {
@@ -75,7 +75,8 @@ export const auth = {
     logout(state) {
       state.status.loggedIn = false;
       state.user = null;
-      localStorage.removeItem(user);
+      localStorage.removeItem('user');
+      localStorage.removeItem('cartItems2');
     },
     RegisterFormSuccess(state) {
       state.status.loggedIn = false;

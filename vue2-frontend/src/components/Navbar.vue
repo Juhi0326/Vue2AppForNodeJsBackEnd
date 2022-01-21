@@ -131,13 +131,19 @@
 </template>
 
 <script>
+import userService from '../services/userService'
 export default {
   methods: {
     login() {
       this.$router.push("/login");
     },
     async logout() {
+      const user = this.$store.getters['auth/activeUser']
+      console.log(user.userId)
+      const payload =JSON.stringify(this.$store.getters['cart2/getState'])
+
       try {
+        await userService.changeCartByUserId(user.userId, payload)
         await this.$store.dispatch("cart2/clearCart");
         await this.$store.dispatch("auth/logout");
         this.$router.push("/");

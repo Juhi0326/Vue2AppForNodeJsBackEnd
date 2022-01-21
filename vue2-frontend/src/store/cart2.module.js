@@ -17,6 +17,9 @@ export const cart2 = {
         getCartItems2: state => {
             return state.items
         },
+        getState: state => {
+            return state
+        },
         SumOfQuantity: state => {
             return getSumQuantity(state.items)
         },
