@@ -4,9 +4,9 @@ const cartItems2 = JSON.parse(localStorage.getItem('cartItems2'));
 
 const getDefaultState = () => {
     return {
-      items: []
+        items: []
     }
-  }
+}
 
 const initialState = cartItems2 ? cartItems2 : getDefaultState()
 
@@ -28,13 +28,12 @@ export const cart2 = {
         }
     },
     actions: {
-        fillCartFromDb({commit}, payload) {
-            console.log('ez az actions-ból jön: ' + payload.items[0].name)
+        fillCartFromDb({ commit }, payload) {
             localStorage.setItem('cartItems2', payload);
             commit('FILL_CART_FROM_DB', payload)
         },
         addProduct2({ commit, getters }, product) {
-            let products =  getters.getCartItems2
+            let products = getters.getCartItems2
             let productIndex = lodash.findIndex(getters.getCartItems2, function (o) { return o._id === product._id; });
             if (productIndex < 0) {
                 let subi = getSubtotal(product)
@@ -45,14 +44,13 @@ export const cart2 = {
                 let subTotal = getSubtotal(products[productIndex])
                 products[productIndex].subTotal = subTotal
             }
-            localStorage.setItem('cartItems2', JSON.stringify({items:products}));
-            
+            localStorage.setItem('cartItems2', JSON.stringify({ items: products }));
             commit('ADD_PRODUCT', products)
         },
         changeQuantityOfProductById({ commit, getters }, payload) {
             let productId = payload.productId
             let quantity = payload.quantity
-            let products =  getters.getCartItems2
+            let products = getters.getCartItems2
             let productIndex = lodash.findIndex(getters.getCartItems2, function (o) { return o._id === productId; });
             if (productIndex < 0) {
                 console.log('nincs ilyen product id')
@@ -60,7 +58,7 @@ export const cart2 = {
                 products[productIndex].quantity = quantity
                 let subTotal = getSubtotal(products[productIndex])
                 products[productIndex].subTotal = subTotal
-                localStorage.setItem('cartItems2', JSON.stringify({items:products}));
+                localStorage.setItem('cartItems2', JSON.stringify({ items: products }));
                 commit('CHANGE_QUANTITY_OF_PRODUCTS_BY_ID', products)
             }
         },
@@ -73,7 +71,7 @@ export const cart2 = {
     },
     mutations: {
         FILL_CART_FROM_DB(state, payload) {
-            Object.assign(state,payload)
+            Object.assign(state, payload)
             localStorage.setItem('cartItems2', JSON.stringify(state));
         },
         ADD_PRODUCT(state, products) {
@@ -85,11 +83,10 @@ export const cart2 = {
         CLEAR_CART(state) {
             Object.assign(state, getDefaultState())
         },
-        DELETE_PRODUCT( state, productId) {
-            state.items = state.items.filter( item => {
+        DELETE_PRODUCT(state, productId) {
+            state.items = state.items.filter(item => {
                 return item._id !== productId
             })
         }
     }
-
 };

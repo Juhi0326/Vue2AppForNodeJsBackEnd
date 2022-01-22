@@ -13,12 +13,8 @@ const getSumQuantity = (products) => {
 }
 
 const getSubtotal = (product) => {
-    console.log('ez az objet jön be: ' + product)
     let textLength = product.discountedPrice.length
-    console.log('ez a hossza : ' + textLength)
     let discountedPrice = product.discountedPrice.substring(0, textLength - 3)
-    console.log('ez a levágott : ' + discountedPrice)
-
     discountedPrice = discountedPrice.replace(/\s+/g, '')
     return discountedPrice * product.quantity
 }
