@@ -4,66 +4,90 @@
       <h1>A Kosár tartalma:</h1>
       <br />
       <v-divider></v-divider>
-      <div v-for="(product, index) in cartItems2" :key="index" class="my-4">
-        <h2>Termék neve: {{ product.name }}</h2>
-        <h2>egységár: {{ product.discountedPrice }}</h2>
-        <br />
-        <v-row>
-          <v-col cols="5"> </v-col>
-          <h2>mennyiség:</h2>
-          <v-col cols="1">
-            <v-text-field
-              solo
-              v-model="product.quantity"
-              disabled
-              outlined
-            ></v-text-field>
-          </v-col>
-          <v-col cols="1">
-            <h2>db</h2>
-          </v-col>
-          <v-col cols="2">
-            <v-btn @click="increase(product._id, product.quantity)">+</v-btn>
-            <v-btn @click="decrease(product._id, product.quantity)" class="ml-2"
-              >-</v-btn
-            >
-          </v-col>
-        </v-row>
-        <h2>Termék ára összesen: {{ product.subTotal | currency }}</h2>
-        <ButtonComp
-          class="ma-2 my-3"
-          propColor="red"
-          :propRounded="true"
-          :propDark="true"
-          @click="deleteProduct(product._id)"
-          >Termék eltávolítása
-        </ButtonComp>
-        <v-divider></v-divider>
-      </div>
-      <h1>
-        A kosárban lévő termékek ára összesen: {{ sumOfCharge | currency }}
-      </h1>
-      <h2>kiszállítási díj: {{ deliveryPrice }}</h2>
-      <h1 class="mt-6"> <span id="finalyPrice">Fizetendő összesen: {{finallyPrice | currency}}</span> </h1>
-      <br />
+      <v-row>
+        <v-col cols="6">
+          <div v-for="(product, index) in cartItems2" :key="index" class="my-4">
+            <v-row>
+              <v-col cols="2">
+                <v-img max-width="200" :src="product.imagePath"> </v-img>
+              </v-col>
+              <v-col cols="8">
+                <h2>Termék neve: {{ product.name }}</h2>
+                <h2>egységár: {{ product.discountedPrice }}</h2>
+                <br />
+                <v-row>
+                  <v-col cols="5"> </v-col>
+                  <h2>mennyiség:</h2>
+                  <v-col cols="1">
+                    <v-text-field
+                      solo
+                      v-model="product.quantity"
+                      disabled
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="1">
+                    <h2>db</h2>
+                  </v-col>
+                  <v-col cols="2">
+                    <v-btn @click="increase(product._id, product.quantity)"
+                      >+</v-btn
+                    >
+                    <v-btn
+                      @click="decrease(product._id, product.quantity)"
+                      class="ml-2"
+                      >-</v-btn
+                    >
+                  </v-col>
+                </v-row>
+                <h2>Termék ára összesen: {{ product.subTotal | currency }}</h2>
+                <ButtonComp
+                  class="ma-2 my-3"
+                  propColor="red"
+                  :propRounded="true"
+                  :propDark="true"
+                  @click="deleteProduct(product._id)"
+                  >Termék eltávolítása
+                </ButtonComp>
+              </v-col>
+            </v-row>
+            <v-divider></v-divider>
+          </div>
+        </v-col>
+        <v-col cols="1">
 
-      <ButtonComp
-        class="ma-2 my-3"
-        propColor="red"
-        :propRounded="true"
-        :propDark="true"
-        >Megrendelem
-      </ButtonComp>
-      <ButtonComp
-        class="ma-2"
-        propColor="red"
-        :propRounded="true"
-        :propText="true"
-        @click="clearCartItems2"
-      >
-        Kosár ürítése
-      </ButtonComp>
-      <br />
+        </v-col>
+        <v-col>
+          <h1>
+            A kosárban lévő termékek ára összesen: {{ sumOfCharge | currency }}
+          </h1>
+          <h2>kiszállítási díj: {{ deliveryPrice }}</h2>
+          <h1 class="mt-6">
+            <span id="finalyPrice"
+              >Fizetendő összesen: {{ finallyPrice | currency }}</span
+            >
+          </h1>
+          <br />
+
+          <ButtonComp
+            class="ma-2 my-3"
+            propColor="red"
+            :propRounded="true"
+            :propDark="true"
+            >Megrendelem
+          </ButtonComp>
+          <ButtonComp
+            class="ma-2"
+            propColor="red"
+            :propRounded="true"
+            :propText="true"
+            @click="clearCartItems2"
+          >
+            Kosár ürítése
+          </ButtonComp>
+          <br />
+        </v-col>
+      </v-row>
     </div>
 
     <div v-else>
@@ -139,7 +163,7 @@ export default {
       if (this.sumOfCharge > 10000) {
         return this.sumOfCharge;
       } else {
-        return this.sumOfCharge+1500;
+        return this.sumOfCharge + 1500;
       }
     },
     SumOfQuantity() {

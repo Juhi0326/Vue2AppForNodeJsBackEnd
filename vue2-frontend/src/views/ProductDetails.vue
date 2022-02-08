@@ -109,12 +109,15 @@ export default {
       await productService.getProductById(productId).then((response) => {
         this.content = response.data.product;
         console.log(this.content);
+        let img = this.content.imagePath.split('\\').join('/')
+        console.log(img)
+        console.log(this.content.imagePath);
         this.content.price = this.formatMoney(this.content.price);
         this.content.discountedPrice = this.formatMoney(
           this.content.discountedPrice
         );
         this.content.imagePath =
-          "http://localhost:8081/" + this.content.imagePath;
+          "http://localhost:8081/" + img
       });
     },
     formatMoney(amount) {

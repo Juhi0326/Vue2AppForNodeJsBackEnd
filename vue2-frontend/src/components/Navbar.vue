@@ -27,6 +27,7 @@
               v-on="on"
               @click="goToProductsPage"
               class="ma-3"
+              large
             >
               mdi-rugby
             </v-icon>
@@ -41,6 +42,7 @@
               v-on="on"
               @click="goToHomePagePage"
               class="ml-3 mr-1"
+              large
             >
               mdi-home
             </v-icon>
@@ -50,16 +52,11 @@
 
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn text
-              > 
-              <v-icon
-                v-bind="attrs"
-                v-on="on"
-                @click="goToCartPage"
-              >
+            <v-btn text>
+              <v-icon v-bind="attrs" v-on="on" @click="goToCartPage" large>
                 mdi-cart-variant
               </v-icon>
-              <span v-show="cartItems>0"> {{cartItems}}</span>
+              <span v-show="cartItems > 0"> {{ cartItems }}</span>
             </v-btn>
           </template>
           <span>Kosár</span>
@@ -68,7 +65,7 @@
 
         <v-tooltip bottom v-if="!loggedIn">
           <template v-slot:activator="{ on, attrs }">
-            <v-icon v-bind="attrs" v-on="on" @click="login">
+            <v-icon v-bind="attrs" v-on="on" @click="login" large>
               mdi-door-closed-lock
             </v-icon>
           </template>
@@ -77,7 +74,7 @@
 
         <v-tooltip bottom v-if="loggedIn">
           <template v-slot:activator="{ on, attrs }">
-            <v-icon v-bind="attrs" v-on="on" @click="logout">
+            <v-icon v-bind="attrs" v-on="on" @click="logout" large>
               mdi-logout
             </v-icon>
           </template>
@@ -131,23 +128,24 @@
 </template>
 
 <script>
-import userService from '../services/userService'
+import userService from "../services/userService";
 export default {
   methods: {
     login() {
       this.$router.push("/login");
     },
     async logout() {
-      const user = this.$store.getters['auth/activeUser']
-      const payload =this.$store.getters['cart2/getState']
+      const user = this.$store.getters["auth/activeUser"];
+      const payload = this.$store.getters["cart2/getState"];
 
       try {
-        await userService.changeCartByUserId(user.userId, payload)
+        await userService.changeCartByUserId(user.userId, payload);
         await this.$store.dispatch("cart2/clearCart");
         await this.$store.dispatch("auth/logout");
         this.$router.push("/");
       } catch (error) {
         console.log(error);
+        await this.$store.dispatch("auth/logout");
       }
     },
     goToProductsPage() {
@@ -176,7 +174,7 @@ export default {
     loginStatus() {
       return this.$store.getters["auth/loginStatus"];
     },
-    cartItems () {
+    cartItems() {
       return this.$store.getters["cart2/SumOfQuantity"];
     },
 
