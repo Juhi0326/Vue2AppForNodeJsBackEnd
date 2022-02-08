@@ -15,31 +15,29 @@
                 <h2>Termék neve: {{ product.name }}</h2>
                 <h2>egységár: {{ product.discountedPrice }}</h2>
                 <br />
-                <v-row>
-                  <v-col cols="5"> </v-col>
-                  <h2>mennyiség:</h2>
-                  <v-col cols="1">
+                <h2>mennyiség:</h2>
                     <v-text-field
                       solo
                       v-model="product.quantity"
                       disabled
                       outlined
+                      
                     ></v-text-field>
-                  </v-col>
-                  <v-col cols="1">
+                 
                     <h2>db</h2>
-                  </v-col>
-                  <v-col cols="2">
+                 
+                  
                     <v-btn @click="increase(product._id, product.quantity)"
                       >+</v-btn
                     >
+                    <br>
                     <v-btn
                       @click="decrease(product._id, product.quantity)"
                       class="ml-2"
                       >-</v-btn
                     >
-                  </v-col>
-                </v-row>
+              
+               
                 <h2>Termék ára összesen: {{ product.subTotal | currency }}</h2>
                 <ButtonComp
                   class="ma-2 my-3"

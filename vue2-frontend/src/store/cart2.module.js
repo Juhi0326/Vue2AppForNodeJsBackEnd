@@ -84,6 +84,11 @@ export const cart2 = {
             Object.assign(state, getDefaultState())
         },
         DELETE_PRODUCT(state, productId) {
+            let filteredItems = state.items.filter(item => {
+                return item._id !== productId
+            })
+            console.log(filteredItems)
+            localStorage.setItem('cartItems2', JSON.stringify({ items: filteredItems }));
             state.items = state.items.filter(item => {
                 return item._id !== productId
             })
