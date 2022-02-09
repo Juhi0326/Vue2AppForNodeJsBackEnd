@@ -3,59 +3,69 @@
     <div v-if="SumOfQuantity != 0">
       <h1>A Kosár tartalma:</h1>
       <br />
-      <v-divider></v-divider>
+
       <v-row>
-        <v-col cols="6">
-          <div v-for="(product, index) in cartItems2" :key="index" class="my-4">
-            <v-row>
-              <v-col cols="2">
-                <v-img max-width="200" :src="product.imagePath"> </v-img>
-              </v-col>
-              <v-col cols="8">
-                <h2>Termék neve: {{ product.name }}</h2>
-                <h2>egységár: {{ product.discountedPrice }}</h2>
-                <br />
-                <h2>mennyiség:</h2>
-                    <v-text-field
-                      solo
-                      v-model="product.quantity"
-                      disabled
-                      outlined
-                      
-                    ></v-text-field>
-                 
-                    <h2>db</h2>
-                 
-                  
+        <v-col sm="12" md="7" class="my-4 overflow-y-auto" id="scroll-target">
+          <v-container
+            id="scroll-target"
+            style="max-height: 1200px"
+            class="overflow-y-auto"
+          >
+            <v-row
+              v-scroll:#scroll-target="onScroll"
+              align="center"
+              justify="center"
+              style="height: 1000px"
+            >
+              <div
+                v-for="(product, index) in cartItems2"
+                :key="index"
+                v-scroll:#scroll-target="onScroll"
+              >
+                <v-row>
+                  <v-col cols="2">
+                    <v-img
+                      max-width="200"
+                      max-height="400"
+                      :src="product.imagePath"
+                    >
+                    </v-img>
+                  </v-col>
+                  <v-col cols="8">
+                    <h2>Termék neve: {{ product.name }}</h2>
+                    <h2>egységár: {{ product.discountedPrice }}</h2>
+                    <br />
+                    <h2>mennyiség:</h2>
+                    <h2>{{ product.quantity }} db</h2>
+
                     <v-btn @click="increase(product._id, product.quantity)"
                       >+</v-btn
                     >
-                    <br>
+
                     <v-btn
                       @click="decrease(product._id, product.quantity)"
                       class="ml-2"
                       >-</v-btn
                     >
-              
-               
-                <h2>Termék ára összesen: {{ product.subTotal | currency }}</h2>
-                <ButtonComp
-                  class="ma-2 my-3"
-                  propColor="red"
-                  :propRounded="true"
-                  :propDark="true"
-                  @click="deleteProduct(product._id)"
-                  >Termék eltávolítása
-                </ButtonComp>
-              </v-col>
+                    <h2 class="mt-4">
+                      Termék ára összesen: {{ product.subTotal | currency }}
+                    </h2>
+                    <ButtonComp
+                      class="ma-2 my-3"
+                      propColor="red"
+                      :propRounded="true"
+                      :propDark="true"
+                      @click="deleteProduct(product._id)"
+                      >Termék eltávolítása
+                    </ButtonComp>
+                  </v-col>
+                </v-row>
+                <v-divider></v-divider>
+              </div>
             </v-row>
-            <v-divider></v-divider>
-          </div>
+          </v-container>
         </v-col>
-        <v-col cols="1">
-
-        </v-col>
-        <v-col>
+        <v-col sm="12" md="5" class="mt-8">
           <h1>
             A kosárban lévő termékek ára összesen: {{ sumOfCharge | currency }}
           </h1>
@@ -101,7 +111,9 @@ export default {
     ButtonComp,
   },
   data() {
-    return {};
+    return {
+      offsetTop: 0,
+    };
   },
   methods: {
     deleteCartItems() {
@@ -136,6 +148,9 @@ export default {
         productId,
         quantity,
       });
+    },
+    onScroll(e) {
+      this.offsetTop = e.target.scrollTop;
     },
   },
 
