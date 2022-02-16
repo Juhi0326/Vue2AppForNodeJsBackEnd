@@ -80,7 +80,6 @@
             >
           </h1>
           <br />
-
           <ButtonComp
             class="ma-2 my-3"
             propColor="red"
@@ -95,7 +94,7 @@
             :propText="true"
             @click="delRecord(
                         id='',
-                        title='KOsár ürítése',
+                        title='Kosár ürítése',
                         confirmText='Biztosan ki szeretnéd üríteni a kosár tartalmát?'
                         )"
           >
