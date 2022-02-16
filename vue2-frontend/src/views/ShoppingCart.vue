@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ConfirmDlg ref="confirm" />
     <div v-if="SumOfQuantity != 0">
       <h1>A Kosár tartalma:</h1>
       <br />
@@ -13,7 +14,6 @@
           >
             <v-row
               v-scroll:#scroll-target="onScroll"
-              align="center"
               justify="center"
               style="height: 1000px"
             >
@@ -55,7 +55,11 @@
                       propColor="red"
                       :propRounded="true"
                       :propDark="true"
-                      @click="deleteProduct(product._id)"
+                      @click="delRecord(
+                        product._id, 
+                        title='Termék eltávolítása',
+                        confirmText='Biztosan el szeretnéd távolítani a terméket a kosárból?'
+                        )"
                       >Termék eltávolítása
                     </ButtonComp>
                   </v-col>
@@ -89,7 +93,11 @@
             propColor="red"
             :propRounded="true"
             :propText="true"
-            @click="clearCartItems2"
+            @click="delRecord(
+                        id='',
+                        title='KOsár ürítése',
+                        confirmText='Biztosan ki szeretnéd üríteni a kosár tartalmát?'
+                        )"
           >
             Kosár ürítése
           </ButtonComp>
@@ -106,9 +114,11 @@
 
 <script>
 import ButtonComp from "../components/ButtonComp.vue";
+import ConfirmDlg from "../components/ConfirmDlg.vue";
 export default {
   components: {
     ButtonComp,
+    ConfirmDlg,
   },
   data() {
     return {
@@ -116,6 +126,21 @@ export default {
     };
   },
   methods: {
+    async delRecord(productId, title, confirmText) {
+      if (
+        await this.$refs.confirm.open(
+          title,
+          confirmText
+        )
+      ) {
+        if (title === 'Termék eltávolítása') {
+          this.deleteProduct(productId);
+        } else {
+          this.deleteCartItems()
+        }
+        
+      }
+    },
     deleteCartItems() {
       console.log("megnyomtam");
       this.$store.dispatch("cart2/clearCart");
