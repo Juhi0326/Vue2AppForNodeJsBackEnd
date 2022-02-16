@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <ConfirmDlg ref="confirm" />
     <v-row>
       <v-col>
         <v-app id="inspire">
@@ -28,7 +29,10 @@
                 <v-col>
                   <ButtonComp
                     v-if="role === 'user' || role === 'admin'"
-                    @click="AddToCart"
+                    @click="addRecord(
+                        title='Termék hozzáadása',
+                        confirmText='Biztosan hozzá szeretnéd adni a terméket a kosárhoz?'
+                        )"
                     class="ma-2"
                     propColor="red"
                     :propRounded="true"
@@ -61,10 +65,12 @@
 <script>
 import productService from "../services/productSevice";
 import ButtonComp from "../components/ButtonComp.vue";
+import ConfirmDlg from "../components/ConfirmDlg.vue";
 export default {
   name: "ProductDetails",
   components: {
     ButtonComp,
+    ConfirmDlg
   },
   data() {
     return {
@@ -99,6 +105,17 @@ export default {
   },
 
   methods: {
+        async addRecord(title, confirmText) {
+      if (
+        await this.$refs.confirm.open(
+          title,
+          confirmText
+        )
+      ) {
+        this.AddToCart()
+        
+      }
+    },
     AddToCart() {
       let product = {};
       Object.assign(product, this.content, { quantity: this.quantity });
