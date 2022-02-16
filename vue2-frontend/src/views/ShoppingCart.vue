@@ -31,21 +31,26 @@
                     >
                     </v-img>
                   </v-col>
-                  <v-col cols="8">
+                  <v-col cols="9">
                     <h2>Termék neve: {{ product.name }}</h2>
                     <h2>egységár: {{ product.discountedPrice }}</h2>
                     <br />
                     <h2>mennyiség:</h2>
                     <h2>{{ product.quantity }} db</h2>
 
-                    <v-btn @click="increase(product._id, product.quantity)"
-                      >+</v-btn
+                    <v-btn color="green darken-2"
+                    class="font-weight-bold"
+                    dark
+                    @click="increase(product._id, product.quantity)"
+                      ><h2>+</h2></v-btn
                     >
 
                     <v-btn
                       @click="decrease(product._id, product.quantity)"
-                      class="ml-2"
-                      >-</v-btn
+                      class="ml-2 font-weight-bold"
+                      dark
+                      color="deep-orange darken-1"
+                      ><h2>-</h2></v-btn
                     >
                     <h2 class="mt-4">
                       Termék ára összesen: {{ product.subTotal | currency }}
