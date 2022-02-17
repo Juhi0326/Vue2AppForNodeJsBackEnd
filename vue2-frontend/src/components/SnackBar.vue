@@ -6,8 +6,7 @@
     :multi-line="snackbar.multiline === true">
         
       {{ snackbar.text }}
-        
-      <v-btn class="ml-2" flat dark @click="closeSnackbar">Bezár</v-btn>
+      <v-btn flat dark @click="closeSnackbar">Bezár</v-btn>
     
   </v-snackbar>
 </template>

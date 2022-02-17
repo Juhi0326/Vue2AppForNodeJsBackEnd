@@ -1,6 +1,7 @@
 import AuthService from '../services/authService';
 import userService from '../services/userService';
 
+
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
   ? { status: { loggedIn: true }, user }
@@ -19,7 +20,7 @@ export const auth = {
   },
   actions: {
 
-    login({ commit }, user) {
+    login({ commit, dispatch }, user) {
 
       return AuthService.login(user).then(
 
@@ -27,6 +28,7 @@ export const auth = {
           
 
           commit('loginSuccess', user);
+          dispatch('snackBar/showSnackbar', {text: "Sikeresen bejelentkeztél!"}, { root: true } )
           return Promise.resolve(user);
         },
         error => {
@@ -44,9 +46,10 @@ export const auth = {
       )
 
     },
-    logout({ commit }) {
+    logout({ commit, dispatch}) {
       //AuthService.logout();
       commit('logout');
+      dispatch('snackBar/showSnackbar', {text: "Sikeresen kijelentkeztél!"}, { root: true } )
     },
     RegisterForm({ commit }, user) {
       return AuthService.RegisterForm(user).then(

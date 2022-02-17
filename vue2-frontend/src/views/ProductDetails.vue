@@ -43,6 +43,7 @@
                 </v-col>
                 <v-col>
                   <v-text-field
+                  v-if="role === 'user' || role === 'admin'"
                     v-model="quantity"
                     solo
                     disabled
@@ -50,9 +51,12 @@
                   ></v-text-field>
                 </v-col>
                 <v-col>
-                  <v-btn 
+                  <v-btn
+                  v-if="role === 'user' || role === 'admin'"
                   color="green darken-2" @click="increase" dark><h2>+</h2></v-btn>
-                  <v-btn color="deep-orange darken-1" dark @click="decrease" class="ml-2"><h2>-</h2></v-btn></v-col
+                  <v-btn
+                  v-if="role === 'user' || role === 'admin'" 
+                  color="deep-orange darken-1" dark @click="decrease" class="ml-2"><h2>-</h2></v-btn></v-col
                 >
               </v-row>
             </v-card-actions>
