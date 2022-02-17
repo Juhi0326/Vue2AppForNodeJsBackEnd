@@ -230,6 +230,8 @@ export default {
     },
     resetForm() {
       this.$refs.changeDataForm.reset();
+      this.formValidity = false;
+      
     },
   },
   created() {
