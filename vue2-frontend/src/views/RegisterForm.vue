@@ -83,16 +83,6 @@
                       </ButtonComp>
                     </v-col>
                   </v-row>
-                  <v-row v-if="errorMessage" class="px-12 pt-12 red--text">
-                    <v-col>
-                      {{ errorMessage }}
-                    </v-col>
-                  </v-row>
-                  <v-row v-if="message" class="px-12 pt-12 green--text">
-                    <v-col>
-                      {{ message }}
-                    </v-col>
-                  </v-row>
                   <!-- <v-btn type="submit" class="ma-12">Submit</v-btn> -->
                 </v-form>
               </v-card>
@@ -167,8 +157,10 @@ export default {
           this.message = response.data.message;
           this.resetForm();
           console.log(response.data);
+          this.$store.dispatch("snackBar/showSnackbar", {text: "A regisztráció sikeresen megtörtént!"});
         })
         .catch((err) => {
+          
           if (err.response.data.message) {
             this.errorMessage = err.response.data.message;
           } else if (err.response.data.Error.message) {
@@ -176,6 +168,7 @@ export default {
           } else {
             this.errorMessage = "ismeretlen hiba történt";
           }
+          this.$store.dispatch("snackBar/showSnackbar", {text: "Sikertelen regisztráció! Hibaüzenet: " + this.errorMessage});
         });
     },
     checkValidity() {

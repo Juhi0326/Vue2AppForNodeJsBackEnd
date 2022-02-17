@@ -136,11 +136,13 @@ export default {
               throw new Error(response.data.error.message)
           } else {
               this.clear();
+              this.$store.dispatch("snackBar/showSnackbar", {text: "A terméket sikeresen létrehoztuk!"});
               this.message = response.data.message;
           }
           //console.log('vagy innen jön?' + response.data.error.message);
         })
         .catch((err) => {
+          this.$store.dispatch("snackBar/showSnackbar", {text: "A terméket nem sikerült létrehozni!"});
             this.errorMessage = err
             console.log(err)
 

@@ -144,7 +144,7 @@ export default {
           } else {
             return (
               // eslint-disable-next-line
-              /^[a-zA-ZíÍéÉáÁőŐűŰúÚóÓüÜ0-9-. ]{3,20}$/g.test(value) ||
+              /^[a-zA-ZíÍéÉáÁöÖőŐűŰúÚóÓüÜ0-9-. ]{3,20}$/g.test(value) ||
               " a felhasználó név csak normál karakterekből és számokból állhat (a pont és a szóköz engedélyezett), 3-tól 20 karakterig"
             );
           }
@@ -219,6 +219,7 @@ export default {
           this.getMyData();
           this.resetForm();
           this.$store.dispatch("auth/changeUser", id);
+          this.$store.dispatch("snackBar/showSnackbar", {text: "A felhasználói adatok sikeresen megváltoztak!"});
         });
       } catch (error) {
         console.log(error);
