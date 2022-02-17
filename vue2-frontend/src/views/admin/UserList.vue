@@ -74,8 +74,36 @@
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-        <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem(item)"
+              v-bind="attrs"
+              v-on="on"
+            >
+              mdi-pencil
+            </v-icon>
+          </template>
+          <span>Szerkeszt</span>
+        </v-tooltip>
+
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon
+              small
+              class="mr-2"
+              @click="deleteItem(item)"
+              v-bind="attrs"
+              v-on="on"
+            >
+              mdi-delete
+            </v-icon>
+          </template>
+          <span>Töröl</span>
+        </v-tooltip>
+
       </template>
     </v-data-table>
   </div>
@@ -175,7 +203,9 @@ export default {
         .deleteUserById(this.editedItem._id)
         .then((response) => {
           console.log(response);
-          this.$store.dispatch("snackBar/showSnackbar", {text: "A felhasználót sikeresen töröltük!"});
+          this.$store.dispatch("snackBar/showSnackbar", {
+            text: "A felhasználót sikeresen töröltük!",
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -203,7 +233,9 @@ export default {
           .changeUserDataById(id, payload)
           .then((response) => {
             console.log(response);
-            this.$store.dispatch("snackBar/showSnackbar", {text: "A felhasználót jogkörét sikeresen megváltoztattuk!"});
+            this.$store.dispatch("snackBar/showSnackbar", {
+              text: "A felhasználót jogkörét sikeresen megváltoztattuk!",
+            });
           })
           .catch((err) => {
             console.log(err);
