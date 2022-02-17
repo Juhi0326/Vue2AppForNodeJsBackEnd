@@ -9,7 +9,7 @@
         <v-col sm="12" md="7" class="my-4 overflow-y-auto" id="scroll-target">
           <v-container
             id="scroll-target"
-            style="max-height: 1200px"
+            style="max-height: 800px"
             class="overflow-y-auto"
           >
             <v-row

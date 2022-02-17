@@ -29,10 +29,13 @@
                 <v-col>
                   <ButtonComp
                     v-if="role === 'user' || role === 'admin'"
-                    @click="addRecord(
-                        title='Termék hozzáadása',
-                        confirmText='Biztosan hozzá szeretnéd adni a terméket a kosárhoz?'
-                        )"
+                    @click="
+                      addRecord(
+                        (title = 'Termék hozzáadása'),
+                        (confirmText =
+                          'Biztosan hozzá szeretnéd adni a terméket a kosárhoz?')
+                      )
+                    "
                     class="ma-2"
                     propColor="red"
                     :propRounded="true"
@@ -43,7 +46,7 @@
                 </v-col>
                 <v-col>
                   <v-text-field
-                  v-if="role === 'user' || role === 'admin'"
+                    v-if="role === 'user' || role === 'admin'"
                     v-model="quantity"
                     solo
                     disabled
@@ -52,11 +55,20 @@
                 </v-col>
                 <v-col>
                   <v-btn
-                  v-if="role === 'user' || role === 'admin'"
-                  color="green darken-2" @click="increase" dark><h2>+</h2></v-btn>
+                    v-if="role === 'user' || role === 'admin'"
+                    color="green darken-2"
+                    @click="increase"
+                    dark
+                    ><h2>+</h2></v-btn
+                  >
                   <v-btn
-                  v-if="role === 'user' || role === 'admin'" 
-                  color="deep-orange darken-1" dark @click="decrease" class="ml-2"><h2>-</h2></v-btn></v-col
+                    v-if="role === 'user' || role === 'admin'"
+                    color="deep-orange darken-1"
+                    dark
+                    @click="decrease"
+                    class="ml-2"
+                    ><h2>-</h2></v-btn
+                  ></v-col
                 >
               </v-row>
             </v-card-actions>
@@ -75,7 +87,7 @@ export default {
   name: "ProductDetails",
   components: {
     ButtonComp,
-    ConfirmDlg
+    ConfirmDlg,
   },
   data() {
     return {
@@ -105,15 +117,9 @@ export default {
   },
 
   methods: {
-        async addRecord(title, confirmText) {
-      if (
-        await this.$refs.confirm.open(
-          title,
-          confirmText
-        )
-      ) {
+    async addRecord(title, confirmText) {
+      if (await this.$refs.confirm.open(title, confirmText)) {
         this.AddToCart();
-        
       }
     },
     AddToCart() {
@@ -122,21 +128,20 @@ export default {
       this.$store.dispatch("cart2/addProduct2", product);
       this.$router.push("/users/shopping-cart");
       this.quantity = 1;
-      this.openSnackbar()
+      this.openSnackbar();
     },
     async getProduct(productId) {
       await productService.getProductById(productId).then((response) => {
         this.content = response.data.product;
         console.log(this.content);
-        let img = this.content.imagePath.split('\\').join('/')
-        console.log(img)
+        let img = this.content.imagePath.split("\\").join("/");
+        console.log(img);
         console.log(this.content.imagePath);
         this.content.price = this.formatMoney(this.content.price);
         this.content.discountedPrice = this.formatMoney(
           this.content.discountedPrice
         );
-        this.content.imagePath =
-          "http://localhost:8081/" + img
+        this.content.imagePath = "http://localhost:8081/" + img;
       });
     },
     formatMoney(amount) {
@@ -160,8 +165,10 @@ export default {
       }
     },
     openSnackbar() {
-      this.$store.dispatch("snackBar/showSnackbar", {text: "A terméket sikeresen hozzáadtuk a kosárhoz!"});
-    }
+      this.$store.dispatch("snackBar/showSnackbar", {
+        text: "A terméket sikeresen hozzáadtuk a kosárhoz!",
+      });
+    },
   },
 };
 </script>
