@@ -175,6 +175,7 @@ export default {
         .deleteUserById(this.editedItem._id)
         .then((response) => {
           console.log(response);
+          this.$store.dispatch("snackBar/showSnackbar", {text: "A felhasználót sikeresen töröltük!"});
         })
         .catch((err) => {
           console.log(err);
@@ -202,6 +203,7 @@ export default {
           .changeUserDataById(id, payload)
           .then((response) => {
             console.log(response);
+            this.$store.dispatch("snackBar/showSnackbar", {text: "A felhasználót jogkörét sikeresen megváltoztattuk!"});
           })
           .catch((err) => {
             console.log(err);
