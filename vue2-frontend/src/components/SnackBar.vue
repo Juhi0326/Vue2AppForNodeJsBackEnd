@@ -3,30 +3,29 @@
     top
     v-model="snackbar.visible"
     :timeout="snackbar.timeout"
-    :multi-line="snackbar.multiline === true">
-        
+    :multi-line="snackbar.multiline === true"
+  >
+    <div class="d-flex justify-space-between align-center">
       {{ snackbar.text }}
-      <v-btn flat dark @click="closeSnackbar">Bezár</v-btn>
-    
+      <v-btn class="ml-4" flat dark @click="closeSnackbar">Bezár</v-btn>
+    </div>
   </v-snackbar>
 </template>
 
 <script>
 export default {
-
   computed: {
     snackbar() {
-      return this.$store.getters["snackBar/getSnackBar"]
-    }
+      return this.$store.getters["snackBar/getSnackBar"];
+    },
   },
   methods: {
-      closeSnackbar() {
-          this.$store.dispatch("snackBar/closeSnackbar");
-      }
-  }
-}
+    closeSnackbar() {
+      this.$store.dispatch("snackBar/closeSnackbar");
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

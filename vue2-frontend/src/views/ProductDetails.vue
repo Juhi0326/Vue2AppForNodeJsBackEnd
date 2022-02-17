@@ -160,7 +160,7 @@ export default {
       }
     },
     openSnackbar() {
-      this.$store.dispatch("snackBar/showSnackbar", {text: "A terméket sokeresen hozzáadtuk a kosárhoz!"});
+      this.$store.dispatch("snackBar/showSnackbar", {text: "A terméket sikeresen hozzáadtuk a kosárhoz!"});
     }
   },
 };
