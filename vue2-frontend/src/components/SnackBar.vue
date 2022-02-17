@@ -7,7 +7,7 @@
   >
     <div class="d-flex justify-space-between align-center">
       {{ snackbar.text }}
-      <v-btn class="ml-4" flat dark @click="closeSnackbar">Bezár</v-btn>
+      <v-btn class="ml-4" text dark @click="closeSnackbar">Bezár</v-btn>
     </div>
   </v-snackbar>
 </template>

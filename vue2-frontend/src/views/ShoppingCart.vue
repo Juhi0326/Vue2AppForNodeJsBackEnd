@@ -38,10 +38,11 @@
                     <h2>mennyiség:</h2>
                     <h2>{{ product.quantity }} db</h2>
 
-                    <v-btn color="green darken-2"
-                    class="font-weight-bold"
-                    dark
-                    @click="increase(product._id, product.quantity)"
+                    <v-btn
+                      color="green darken-2"
+                      class="font-weight-bold"
+                      dark
+                      @click="increase(product._id, product.quantity)"
                       ><h2>+</h2></v-btn
                     >
 
@@ -60,11 +61,14 @@
                       propColor="red"
                       :propRounded="true"
                       :propDark="true"
-                      @click="delRecord(
-                        product._id, 
-                        title='Termék eltávolítása',
-                        confirmText='Biztosan el szeretnéd távolítani a terméket a kosárból?'
-                        )"
+                      @click="
+                        delRecord(
+                          product._id,
+                          (title = 'Termék eltávolítása'),
+                          (confirmText =
+                            'Biztosan el szeretnéd távolítani a terméket a kosárból?')
+                        )
+                      "
                       >Termék eltávolítása
                     </ButtonComp>
                   </v-col>
@@ -97,11 +101,14 @@
             propColor="red"
             :propRounded="true"
             :propText="true"
-            @click="delRecord(
-                        id='',
-                        title='Kosár ürítése',
-                        confirmText='Biztosan ki szeretnéd üríteni a kosár tartalmát?'
-                        )"
+            @click="
+              delRecord(
+                (id = ''),
+                (title = 'Kosár ürítése'),
+                (confirmText =
+                  'Biztosan ki szeretnéd üríteni a kosár tartalmát?')
+              )
+            "
           >
             Kosár ürítése
           </ButtonComp>
@@ -131,23 +138,20 @@ export default {
   },
   methods: {
     async delRecord(productId, title, confirmText) {
-      if (
-        await this.$refs.confirm.open(
-          title,
-          confirmText
-        )
-      ) {
-        if (title === 'Termék eltávolítása') {
+      if (await this.$refs.confirm.open(title, confirmText)) {
+        if (title === "Termék eltávolítása") {
           this.deleteProduct(productId);
         } else {
-          this.deleteCartItems()
+          this.deleteCartItems();
         }
-        
       }
     },
     deleteCartItems() {
       console.log("megnyomtam");
       this.$store.dispatch("cart2/clearCart");
+      this.$store.dispatch("snackBar/showSnackbar", {
+        text: "A kosár ürítése sikeresen megtörtént!",
+      });
     },
     clearCartItems2() {
       console.log("megnyomtam");
@@ -159,6 +163,9 @@ export default {
     },
     deleteProduct(productId) {
       this.$store.dispatch("cart2/deleteProductById", productId);
+      this.$store.dispatch("snackBar/showSnackbar", {
+        text: "A terméket sikeresen eltávollítottuk a kosárból!",
+      });
     },
     decrease(productId, quantity) {
       let numberQuantity = parseInt(quantity);

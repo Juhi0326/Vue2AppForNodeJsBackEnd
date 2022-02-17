@@ -1,6 +1,6 @@
 <template>
   <v-app class="container">
-    <v-row>
+    <v-row dense>
       <v-col cols="12" sm="6" md="3">
         <v-text-field label="Keress a termékek között!" outlined v-model="searchField" class="ml-12"></v-text-field>
       </v-col>
@@ -119,6 +119,9 @@ export default {
 </script>
 
 <style scoped>
+  .v-application--wrap {
+    max-height: 0px;
+  }
 .card-class {
   margin: 50px;
 }
