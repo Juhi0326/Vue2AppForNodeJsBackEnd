@@ -4,7 +4,7 @@
     <v-footer
       color="red"
       dark
-      fixed
+      absolute
     >
     
     <div class="container">

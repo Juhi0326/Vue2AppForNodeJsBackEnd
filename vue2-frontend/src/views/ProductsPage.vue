@@ -32,13 +32,14 @@
 
           <v-divider class="mx-4"></v-divider>    
           <v-card-actions>
-            <v-btn
-              color="deep-purple lighten-2"
-              text
+            <ButtonComp
+             propColor="red"
+            :propRounded="true"
+            :propText="true"
               @click="goToProductDetails(product._id)"
             >
               Részletek
-            </v-btn>
+            </ButtonComp>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -48,7 +49,11 @@
 
 <script>
 import ProductService from "../services/productSevice";
+import ButtonComp from "../components/ButtonComp.vue";
 export default {
+  components: {
+    ButtonComp
+  },
   name: "ProductsPage",
   data() {
     return {

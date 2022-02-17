@@ -4,7 +4,9 @@
     <br />
     <SnackBar />
     <SpeedDial v-if="activeUser.role === 'admin'"/>
-    <router-view class="container"></router-view>
+    <router-view class="container">
+      
+    </router-view>
     <FooterComp />
   </v-app>
 </template>
