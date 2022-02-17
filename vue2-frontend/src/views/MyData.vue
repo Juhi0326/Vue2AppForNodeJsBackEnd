@@ -17,10 +17,14 @@
           </v-card-subtitle>
 
           <v-card-actions>
-            <v-btn color="orange lighten-2" text @click="show = !show">
-              Módosítom az adatokat
-            </v-btn>
-
+            <ButtonComp
+              propColor="red"
+              :propRounded="true"
+              :propText="true"
+              @click="show = !show"
+            >
+              {{Text}}
+            </ButtonComp>
             <v-spacer></v-spacer>
           </v-card-actions>
           <v-expand-transition>
@@ -136,6 +140,7 @@ export default {
       password2: "",
       message: "",
       errorMessage: "",
+      text: 'Módosítom az adatokat',
       FILE: null,
       nameRules: [
         (value) => {
@@ -219,7 +224,9 @@ export default {
           this.getMyData();
           this.resetForm();
           this.$store.dispatch("auth/changeUser", id);
-          this.$store.dispatch("snackBar/showSnackbar", {text: "A felhasználói adatok sikeresen megváltoztak!"});
+          this.$store.dispatch("snackBar/showSnackbar", {
+            text: "A felhasználói adatok sikeresen megváltoztak!",
+          });
         });
       } catch (error) {
         console.log(error);
@@ -231,7 +238,6 @@ export default {
     resetForm() {
       this.$refs.changeDataForm.reset();
       this.formValidity = false;
-      
     },
   },
   created() {
@@ -253,7 +259,7 @@ export default {
       this.FILE !== null ? (FILECount = 1) : (FILECount = 0);
 
       fieldCounter =
-        userNameCount + emailCount + passwordCount + password2Count + FILECount
+        userNameCount + emailCount + passwordCount + password2Count + FILECount;
 
       if (fieldCounter > 0 && this.formValidity === true) {
         return true;
@@ -261,6 +267,13 @@ export default {
         return false;
       }
     },
+    Text() {
+      if (!this.show) {
+        return 'Módosítom az adatokat'
+      } else {
+        return 'Mégsem'
+      }
+    }
   },
 };
 </script>
