@@ -80,14 +80,9 @@ export default {
       images: [],
       role: "guest",
       quantity: 1,
-      //modalOpen: true,
     };
   },
-  /*   computed: {
-    productId() {
-      return this.$route.params.id;
-    },
-  }, */
+
   computed: {
     computedProductId() {
       return this.$route.params.id;
@@ -113,7 +108,7 @@ export default {
           confirmText
         )
       ) {
-        this.AddToCart()
+        this.AddToCart();
         
       }
     },
@@ -123,6 +118,7 @@ export default {
       this.$store.dispatch("cart2/addProduct2", product);
       this.$router.push("/users/shopping-cart");
       this.quantity = 1;
+      this.openSnackbar()
     },
     async getProduct(productId) {
       await productService.getProductById(productId).then((response) => {
@@ -159,6 +155,9 @@ export default {
         this.role = this.$store.state.auth.user.role;
       }
     },
+    openSnackbar() {
+      this.$store.dispatch("snackBar/showSnackbar", {text: "A terméket sokeresen hozzáadtuk a kosárhoz!"});
+    }
   },
 };
 </script>

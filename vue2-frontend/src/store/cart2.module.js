@@ -74,7 +74,7 @@ export const cart2 = {
             Object.assign(state, payload)
             localStorage.setItem('cartItems2', JSON.stringify(state));
         },
-        ADD_PRODUCT(state, products) {
+        ADD_PRODUCT(state, rootActions, products) {
             state = products
         },
         CHANGE_QUANTITY_OF_PRODUCTS_BY_ID(state, products) {

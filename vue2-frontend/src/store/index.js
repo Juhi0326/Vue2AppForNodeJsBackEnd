@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { auth } from "./auth.module";
-
+import { snackBar } from './snackBar.module';
 import { cart2 } from "./cart2.module";
 //import createPersistedState from "vuex-persistedstate";
 
@@ -11,7 +11,8 @@ export default new Vuex.Store({
 
   modules: {
     auth,
-    cart2
+    cart2,
+    snackBar
   },
   //plugins: [createPersistedState()]
 })
