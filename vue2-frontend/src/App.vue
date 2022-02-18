@@ -3,9 +3,10 @@
     <NavBar />
     <br />
     <SnackBar />
-    <SpeedDial v-if="activeUser.role === 'admin'"/>
+    <SpeedDial v-if=" activeUser && activeUser.role === 'admin'"/>
     <router-view class="container"> </router-view>
     <v-spacer> </v-spacer>
+    <FooterComp />
    
    
   </v-app>
@@ -14,14 +15,14 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import SnackBar from "./components/SnackBar.vue";
-//import FooterComp from "./components/FooterComp.vue";
+import FooterComp from "./components/FooterComp.vue";
 import SpeedDial from "./components/SpeedDial.vue";
 export default {
   name: "App",
 
   components: {
     NavBar,
-    //FooterComp,
+    FooterComp,
     SnackBar,
     SpeedDial,
   },

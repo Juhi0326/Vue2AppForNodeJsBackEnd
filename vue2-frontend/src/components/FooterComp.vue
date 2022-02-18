@@ -1,10 +1,10 @@
 <template>
   <div id="app" >
-  <v-app id="inspire">
+  <div id="inspire">
     <v-footer
       color="red"
       dark
-      absolute
+      fixed
     >
     
     <div class="container">
@@ -29,7 +29,7 @@
       
       </div>
     </v-footer>
-  </v-app>
+  </div>
 </div>
 </template>
 
