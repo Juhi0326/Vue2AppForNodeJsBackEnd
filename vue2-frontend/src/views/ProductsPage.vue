@@ -2,9 +2,17 @@
   <v-app class="container">
     <v-row dense>
       <v-col cols="12" sm="6" md="3">
-        <v-text-field label="Keress a termékek között!" outlined v-model="searchField" class="ml-12"></v-text-field>
+        <v-text-field
+          label="Keress a termékek között!"
+          outlined
+          v-model="searchField"
+          class="ml-12"
+        ></v-text-field>
       </v-col>
     </v-row>
+    <div class="d-flex justify-center align-center" v-if="loader">
+      <LoadingSpinner />
+    </div>
     <v-row>
       <v-col
         cols="12"
@@ -25,17 +33,24 @@
 
           <v-card-text>
             <v-row align="center" class="mx-0">
-              <div v-if="product.price===product.discountedPrice" class="grey--text ms-4">ár: {{ product.price }}</div>
-              <div v-else>ár: <span id="discount">{{product.discountedPrice}}</span></div>
+              <div
+                v-if="product.price === product.discountedPrice"
+                class="grey--text ms-4"
+              >
+                ár: {{ product.price }}
+              </div>
+              <div v-else>
+                ár: <span id="discount">{{ product.discountedPrice }}</span>
+              </div>
             </v-row>
           </v-card-text>
 
-          <v-divider class="mx-4"></v-divider>    
+          <v-divider class="mx-4"></v-divider>
           <v-card-actions>
             <ButtonComp
-             propColor="red"
-            :propRounded="true"
-            :propText="true"
+              propColor="red"
+              :propRounded="true"
+              :propText="true"
               @click="goToProductDetails(product._id)"
             >
               Részletek
@@ -50,9 +65,11 @@
 <script>
 import ProductService from "../services/productSevice";
 import ButtonComp from "../components/ButtonComp.vue";
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 export default {
   components: {
-    ButtonComp
+    ButtonComp,
+    LoadingSpinner
   },
   name: "ProductsPage",
   data() {
@@ -60,6 +77,7 @@ export default {
       content: [],
       searchField: "",
       id: null,
+      loader: false,
     };
   },
   computed: {
@@ -80,8 +98,9 @@ export default {
     },
   },
   mounted() {
+    this.loader = true;
     this.getProducts();
-    console.log(this.$route.name)
+    console.log(this.$route.name);
   },
   methods: {
     formatMoney(amount) {
@@ -100,6 +119,7 @@ export default {
     async getProducts() {
       await ProductService.getProducts().then((response) => {
         this.content = response.data.products;
+        this.loader = false;
       });
       this.content.map((product) => {
         product.imagePath = "http://localhost:8081/" + product.imagePath;
@@ -119,14 +139,15 @@ export default {
 </script>
 
 <style scoped>
-  .v-application--wrap {
-    max-height: 0px;
-  }
+.v-application--wrap {
+  max-height: 0px;
+}
 .card-class {
   margin: 50px;
 }
 #discount {
-    color: crimson;
-    font-weight: bold;
+  color: crimson;
+  font-weight: bold;
 }
+
 </style>>

@@ -29,26 +29,26 @@
                         ></v-text-field>
                         <v-text-field
                           v-model="price"
-                          label="price"
+                          label="Ár"
                           required
                           class="px-12"
                         ></v-text-field>
                         <v-text-field
                           v-model="discountPercentage"
-                          label="discountPercentage"
+                          label="kedvezmény"
                           required
                           class="px-12"
                         ></v-text-field>
                         <v-textarea
                           solo
                           name="input-7-4"
-                          label="description"
+                          label="Leírás"
                           v-model="description"
                           class="px-12"
                         ></v-textarea>
                         <v-file-input
                           accept="image/*"
-                          label="File input"
+                          label="Kép csatolása"
                           @change="onFileUpload"
                           class="px-12"
                         ></v-file-input>
