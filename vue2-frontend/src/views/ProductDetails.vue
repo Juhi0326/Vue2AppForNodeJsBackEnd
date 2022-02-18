@@ -1,10 +1,18 @@
 <template>
   <div class="container">
     <ConfirmDlg ref="confirm" />
+    <div class="d-flex justify-center align-center" v-if="loader">
+      <LoadingSpinner />
+    </div>
     <v-row>
       <v-col>
         <v-app id="inspire">
-          <v-card class="mx-auto my-12" max-width="600" min-width="400">
+          <v-card
+            class="mx-auto my-12"
+            max-width="600"
+            min-width="400"
+            v-if="!loader"
+          >
             <v-img height="550" :src="Product.imagePath"></v-img>
 
             <v-card-title>{{ Product.name }}</v-card-title>
@@ -83,11 +91,13 @@
 import productService from "../services/productSevice";
 import ButtonComp from "../components/ButtonComp.vue";
 import ConfirmDlg from "../components/ConfirmDlg.vue";
+import LoadingSpinner from "../components/LoadingSpinner.vue";
 export default {
   name: "ProductDetails",
   components: {
     ButtonComp,
     ConfirmDlg,
+    LoadingSpinner,
   },
   data() {
     return {
@@ -96,6 +106,7 @@ export default {
       images: [],
       role: "guest",
       quantity: 1,
+      loader: false,
     };
   },
 
@@ -114,6 +125,7 @@ export default {
     this.productId = this.$route.params.id;
     this.getProduct(this.productId);
     this.getRole();
+    this.loader = true;
   },
 
   methods: {
@@ -133,6 +145,7 @@ export default {
     async getProduct(productId) {
       await productService.getProductById(productId).then((response) => {
         this.content = response.data.product;
+        this.loader = false;
         console.log(this.content);
         let img = this.content.imagePath.split("\\").join("/");
         console.log(img);
@@ -174,5 +187,4 @@ export default {
 </script>
 
 <style>
-
 </style>
